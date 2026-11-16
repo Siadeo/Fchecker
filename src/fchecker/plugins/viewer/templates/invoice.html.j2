@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>{{ label(L.TYPE_CODES, inv.type_code) }} {{ inv.number }}</title>
+<style>
+  @page { size: A4; margin: 14mm; }
+  :root { --ink:#1d2330; --muted:#667085; --line:#d7dbe2; --soft:#f4f5f7; --accent:#1f5eff; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Inter, Arial, sans-serif; color: var(--ink); font-size: 10pt; margin: 0;
+         padding: 24px; background: #fff; }
+  [title] { cursor: help; text-underline-offset: 2px; }
+  [title]:hover { text-decoration: underline dotted var(--accent); background: #eef3ff; border-radius: 2px; }
+  @media print { [title]:hover { background: none; text-decoration: none; } }
+  h1 { font-size: 20pt; margin: 0; letter-spacing: -.02em; }
+  .muted { color: var(--muted); }
+  header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px;
+           border-bottom: 2px solid var(--ink); padding-bottom: 14px; margin-bottom: 18px; }
+  .meta { text-align: right; line-height: 1.6; }
+  .meta b { font-variant-numeric: tabular-nums; }
+  .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+  .party { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+  .party h2 { font-size: 8.5pt; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 6px; }
+  .party .name { font-weight: 600; font-size: 11pt; }
+  .ids { margin-top: 6px; font-size: 9pt; line-height: 1.5; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+  th { text-align: left; font-size: 8.5pt; text-transform: uppercase; letter-spacing: .05em; color: var(--muted);
+       border-bottom: 1px solid var(--ink); padding: 6px 8px; }
+  td { padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .bottom { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; align-items: start; }
+  .totals td { border: none; padding: 3px 8px; }
+  .totals tr.grand td { border-top: 2px solid var(--ink); font-weight: 700; font-size: 12pt; padding-top: 8px; }
+  .box { background: var(--soft); border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; }
+  .box h3 { font-size: 8.5pt; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 6px; }
+  .notes p { margin: 0 0 6px; }
+  footer { margin-top: 18px; font-size: 8pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1 title="BT-3 — type de facture"{{ src(inv.lines_of.get("BT-3")) }}>{{ label(L.TYPE_CODES, inv.type_code) or "Facture" }}</h1>
+    <div class="muted" title="BT-23 — cadre de facturation"{{ src(inv.lines_of.get("BT-23")) }}>{{ label(L.BUSINESS_PROCESS, inv.business_process) }}</div>
+  </div>
+  <div class="meta">
+    N° <b title="BT-1"{{ src(inv.number) }}>{{ inv.number }}</b><br>
+    Date <b title="BT-2"{{ src(inv.lines_of.get("BT-2")) }}>{{ inv.issue_date | day }}</b><br>
+    {% if inv.due_date %}Échéance <b title="BT-9"{{ src(inv.lines_of.get("BT-9")) }}>{{ inv.due_date | day }}</b><br>{% endif %}
+    {% if inv.buyer_reference %}Réf. acheteur <b title="BT-10"{{ src(inv.lines_of.get("BT-10")) }}>{{ inv.buyer_reference }}</b><br>{% endif %}
+    {% if inv.order_reference %}Commande <b title="BT-13"{{ src(inv.lines_of.get("BT-13")) }}>{{ inv.order_reference }}</b><br>{% endif %}
+    {% if inv.contract_reference %}Contrat <b title="BT-12"{{ src(inv.lines_of.get("BT-12")) }}>{{ inv.contract_reference }}</b><br>{% endif %}
+    <span class="muted">{{ doc.format.value }}{% if profile %} · {{ profile }}{% endif %} · devise <span title="BT-5"{{ src(inv.lines_of.get("BT-5")) }}>{{ currency }}</span></span>
+  </div>
+</header>
+
+<section class="parties">
+{% for role, p, bts, bg in (("Vendeur", inv.seller, ("BT-27", "BT-30", "BT-31", "BT-34", "BT-33"), "BG-4"),
+                             ("Acheteur", inv.buyer, ("BT-44", "BT-47", "BT-48", "BT-49", "BT-33"), "BG-7")) %}
+  <div class="party"{{ src(inv.lines_of.get(bg)) }}>
+    <h2>{{ role }}</h2>
+    <div class="name" title="{{ bts[0] }}"{{ src(p.name) }}>{{ p.name or "—" }}</div>
+    {% if not p.address.is_empty %}
+    <div title="{{ 'BG-5' if role == 'Vendeur' else 'BG-8' }}"{{ src(p.address) }}>
+      {% for l in p.address.lines %}{{ l }}<br>{% endfor %}
+      {{ p.address.postcode or "" }} {{ p.address.city or "" }} {{ p.address.country or "" }}
+    </div>
+    {% endif %}
+    <div class="ids">
+      {% if p.legal_id %}SIREN <span title="{{ bts[1] }}"{{ src(p.legal_id) }}>{{ p.legal_id }}</span><br>{% endif %}
+      {% for s in p.sirets %}SIRET <span title="{{ 'BT-29' if role == 'Vendeur' else 'BT-46' }}"{{ src(s) }}>{{ s }}</span><br>{% endfor %}
+      {% if p.vat_id %}TVA <span title="{{ bts[2] }}"{{ src(p.vat_id) }}>{{ p.vat_id }}</span><br>{% endif %}
+      {% if p.electronic_address %}Adresse électronique <span title="{{ bts[3] }}"{{ src(p.electronic_address) }}>{{ p.electronic_address.scheme ~ ':' if p.electronic_address.scheme }}{{ p.electronic_address }}</span><br>{% endif %}
+      {% if role == "Vendeur" and p.legal_info %}<span class="muted" title="BT-33"{{ src(p.legal_info) }}>{{ p.legal_info }}</span>{% endif %}
+    </div>
+  </div>
+{% endfor %}
+</section>
+
+{% if not inv.deliver_to.is_empty %}
+<div class="box"{{ src(inv.lines_of.get("BG-13")) }}><h3>Livraison</h3>
+  <span title="BT-70"{{ src(inv.lines_of.get("BT-70")) }}>{{ inv.deliver_to_name or "" }}</span>
+  <span title="BG-15"{{ src(inv.deliver_to) }}>{{ inv.deliver_to.one_line() }}</span>
+</div>
+{% endif %}
+
+<table>
+  <thead><tr>
+    <th>#</th><th>Désignation</th><th class="n">Qté</th><th class="n">Prix unit. HT</th>
+    <th class="n">TVA</th><th class="n">Montant HT</th>
+  </tr></thead>
+  <tbody>
+  {% for l in inv.lines %}
+    <tr{{ src(l) }}>
+      <td class="muted" title="BT-126"{{ src(l.lines_of.get("BT-126")) }}>{{ l.id or loop.index }}</td>
+      <td title="BT-153"{{ src(l.lines_of.get("BT-153")) }}>{{ l.name or "" }}</td>
+      <td class="n" title="BT-129 / BT-130"{{ src(l.lines_of.get("BT-129")) }}>{{ l.quantity | number }} {{ l.unit or "" }}</td>
+      <td class="n" title="BT-146"{{ src(l.lines_of.get("BT-146")) }}>{{ l.net_price | money }}</td>
+      <td class="n" title="BT-151 / BT-152"{{ src(l.lines_of.get("BT-151") or l.lines_of.get("BT-152")) }}>{{ l.vat_category or "" }} {{ (l.vat_rate | number) ~ " %" if l.vat_rate is not none }}</td>
+      <td class="n" title="BT-131"{{ src(l.lines_of.get("BT-131")) }}>{{ l.net_amount | money }}</td>
+    </tr>
+  {% else %}
+    <tr><td colspan="6" class="muted">Aucune ligne (profil sans détail des lignes).</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="bottom">
+  <div>
+    {% if inv.vat_breakdown %}
+    <table>
+      <thead><tr><th>Catégorie TVA</th><th class="n">Taux</th><th class="n">Base HT</th><th class="n">TVA</th></tr></thead>
+      <tbody>
+      {% for v in inv.vat_breakdown %}
+        <tr{{ src(v) }}>
+          <td title="BT-118"{{ src(v.lines_of.get("BT-118")) }}>{{ label(L.VAT_CATEGORIES, v.category) }}{% if v.exemption_reason %}<br><span class="muted" title="BT-120"{{ src(v.lines_of.get("BT-120")) }}>{{ v.exemption_reason }}</span>{% endif %}</td>
+          <td class="n" title="BT-119"{{ src(v.lines_of.get("BT-119")) }}>{{ (v.rate | number) ~ " %" if v.rate is not none }}</td>
+          <td class="n" title="BT-116"{{ src(v.lines_of.get("BT-116")) }}>{{ v.basis | money }}</td>
+          <td class="n" title="BT-117"{{ src(v.lines_of.get("BT-117")) }}>{{ v.amount | money }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+    {% if inv.allowances_charges %}
+    <div class="box"><h3>Remises et frais de document</h3>
+      {% for ac in inv.allowances_charges %}
+        <div title="{{ 'BG-21' if ac.is_charge else 'BG-20' }}"{{ src(ac) }}>{{ "Frais" if ac.is_charge else "Remise" }} : {{ ac.reason or "" }} — {{ ac.amount | money(currency) }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <div class="box notes"><h3>Paiement</h3>
+      {% if inv.payment_means_code %}<p title="BT-81"{{ src(inv.lines_of.get("BT-81")) }}>{{ label(L.PAYMENT_MEANS, inv.payment_means_code) }}</p>{% endif %}
+      {% if inv.payment_terms %}<p title="BT-20"{{ src(inv.lines_of.get("BT-20")) }}>{{ inv.payment_terms }}</p>{% endif %}
+      {% for i in inv.ibans %}<p>IBAN <span title="BT-84"{{ src(i) }}>{{ i }}</span>{% for b in inv.bics %} · BIC <span title="BT-86"{{ src(b) }}>{{ b }}</span>{% endfor %}</p>{% endfor %}
+      {% if inv.vat_point_code %}<p class="muted" title="BT-8"{{ src(inv.lines_of.get("BT-8")) }}>Exigibilité de la TVA : {{ label(L.VAT_POINT, inv.vat_point_code) }}</p>{% endif %}
+    </div>
+  </div>
+  <table class="totals">
+    <tr><td>Total des lignes HT</td><td class="n" title="BT-106"{{ src(inv.totals.lines_of.get("BT-106")) }}>{{ inv.totals.lines | money(currency) }}</td></tr>
+    {% if inv.totals.allowances %}<tr><td>Remises</td><td class="n" title="BT-107"{{ src(inv.totals.lines_of.get("BT-107")) }}>− {{ inv.totals.allowances | money(currency) }}</td></tr>{% endif %}
+    {% if inv.totals.charges %}<tr><td>Frais</td><td class="n" title="BT-108"{{ src(inv.totals.lines_of.get("BT-108")) }}>{{ inv.totals.charges | money(currency) }}</td></tr>{% endif %}
+    <tr><td>Total HT</td><td class="n" title="BT-109"{{ src(inv.totals.lines_of.get("BT-109")) }}>{{ inv.totals.without_vat | money(currency) }}</td></tr>
+    <tr><td>TVA</td><td class="n" title="BT-110"{{ src(inv.totals.lines_of.get("BT-110")) }}>{{ inv.totals.vat | money(currency) }}</td></tr>
+    <tr><td><b>Total TTC</b></td><td class="n" title="BT-112"{{ src(inv.totals.lines_of.get("BT-112")) }}><b>{{ inv.totals.with_vat | money(currency) }}</b></td></tr>
+    {% if inv.totals.prepaid %}<tr><td>Déjà payé</td><td class="n" title="BT-113"{{ src(inv.totals.lines_of.get("BT-113")) }}>− {{ inv.totals.prepaid | money(currency) }}</td></tr>{% endif %}
+    {% if inv.totals.rounding %}<tr><td>Arrondi</td><td class="n" title="BT-114"{{ src(inv.totals.lines_of.get("BT-114")) }}>{{ inv.totals.rounding | money(currency) }}</td></tr>{% endif %}
+    <tr class="grand"><td>Net à payer</td><td class="n" title="BT-115"{{ src(inv.totals.lines_of.get("BT-115")) }}>{{ inv.totals.due | money(currency) }}</td></tr>
+  </table>
+</div>
+
+{% if inv.notes %}
+<div class="box notes"><h3>Mentions</h3>
+  {% for n in inv.notes %}
+    <p title="BT-21 / BT-22"{{ src(n) }}>{% if n.code %}<span class="muted">{{ L.NOTE_SUBJECTS.get(n.code, n.code) }} :</span> {% endif %}{{ n.content }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+
+<footer>Représentation lisible générée par Fchecker à partir du XML ({{ doc.display_name }}). Le fichier XML fait foi.
+Survolez une valeur pour afficher son terme métier (BT) EN 16931.</footer>
+{% if interactive %}
+<style>
+  [data-line] { cursor: pointer; }
+  .fx-picked { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 2px; }
+</style>
+<script>
+  /* Clic sur une valeur : la vue Qt lit ce message console et surligne la ligne XML d'origine. */
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest("[data-line]");
+    if (!el) return;
+    var prev = document.querySelector(".fx-picked");
+    if (prev) prev.classList.remove("fx-picked");
+    el.classList.add("fx-picked");
+    console.log("fchecker:xml-line:" + el.dataset.line);
+  });
+</script>
+{% endif %}
+</body>
+</html>

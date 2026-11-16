@@ -1,0 +1,275 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<rsm:CrossIndustryInvoice xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:100"
+    xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
+    xmlns:rsm="urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100"
+    xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <rsm:ExchangedDocumentContext>
+        
+        <ram:BusinessProcessSpecifiedDocumentContextParameter>
+            <ram:ID>S2</ram:ID>
+        </ram:BusinessProcessSpecifiedDocumentContextParameter>
+        
+        <ram:GuidelineSpecifiedDocumentContextParameter>
+            <ram:ID>urn:cen.eu:en16931:2017</ram:ID>
+        </ram:GuidelineSpecifiedDocumentContextParameter>
+    </rsm:ExchangedDocumentContext>
+    <rsm:ExchangedDocument>
+        <ram:ID>MAT-013-F-S2-MONO</ram:ID>
+        <ram:TypeCode>380</ram:TypeCode>
+        <ram:IssueDateTime>
+            <udt:DateTimeString format="102">20261109</udt:DateTimeString>
+        </ram:IssueDateTime>
+        
+            
+        <ram:IncludedNote>
+            <ram:Content>En cas de retard de paiement, des pénalités au taux de 3 fois le taux d&#39;intérêt légal seront exigibles (art. L441-10 du Code de commerce).</ram:Content>
+            
+            <ram:SubjectCode>PMD</ram:SubjectCode>
+            
+        </ram:IncludedNote>
+            
+        <ram:IncludedNote>
+            <ram:Content>Une indemnité forfaitaire pour frais de recouvrement de 40 € sera due en cas de retard de paiement (art. L441-10 et D441-5 du Code de commerce).</ram:Content>
+            
+            <ram:SubjectCode>PMT</ram:SubjectCode>
+            
+        </ram:IncludedNote>
+            
+        <ram:IncludedNote>
+            <ram:Content>Aucun escompte accordé pour paiement anticipé.</ram:Content>
+            
+            <ram:SubjectCode>AAB</ram:SubjectCode>
+            
+        </ram:IncludedNote>
+            
+        <ram:IncludedNote>
+            <ram:Content>SAS au capital de 10 000 EUR</ram:Content>
+            
+            <ram:SubjectCode>REG</ram:SubjectCode>
+            
+        </ram:IncludedNote>
+            
+        <ram:IncludedNote>
+            <ram:Content>RCS Lyon B 538006248</ram:Content>
+            
+            <ram:SubjectCode>ABL</ram:SubjectCode>
+            
+        </ram:IncludedNote>
+            
+        
+    </rsm:ExchangedDocument>
+    <rsm:SupplyChainTradeTransaction>
+
+        
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>1</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedTradeProduct>
+                
+                <ram:Name>Audit énergétique</ram:Name>
+            </ram:SpecifiedTradeProduct>
+            <ram:SpecifiedLineTradeAgreement>
+                <ram:NetPriceProductTradePrice>
+                    <ram:ChargeAmount>250.00</ram:ChargeAmount>
+                    
+                </ram:NetPriceProductTradePrice>
+            </ram:SpecifiedLineTradeAgreement>
+            <ram:SpecifiedLineTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">8.0</ram:BilledQuantity>
+            </ram:SpecifiedLineTradeDelivery>
+            <ram:SpecifiedLineTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    
+                    <ram:RateApplicablePercent>20.00</ram:RateApplicablePercent>
+                    
+                </ram:ApplicableTradeTax>
+                
+                
+                <ram:SpecifiedTradeSettlementLineMonetarySummation>
+                    <ram:LineTotalAmount>2000.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementLineMonetarySummation>
+            </ram:SpecifiedLineTradeSettlement>
+        </ram:IncludedSupplyChainTradeLineItem>
+        
+        <ram:ApplicableHeaderTradeAgreement>
+            
+            <ram:SellerTradeParty>
+
+                <ram:GlobalID schemeID="0009">53800624800016</ram:GlobalID>
+
+
+                <ram:Name>Atelier Lab SAS</ram:Name>
+
+                <ram:SpecifiedLegalOrganization>
+                    
+                    <ram:ID schemeID="0002">538006248</ram:ID>
+                    
+                    
+                    <ram:TradingBusinessName>Atelier Lab</ram:TradingBusinessName>
+                    
+                </ram:SpecifiedLegalOrganization>
+
+
+                <ram:PostalTradeAddress>
+                    <ram:PostcodeCode>69002</ram:PostcodeCode>
+                    <ram:LineOne>12 rue des Essais</ram:LineOne>
+                    
+                    <ram:CityName>Lyon</ram:CityName>
+                    <ram:CountryID>FR</ram:CountryID>
+                </ram:PostalTradeAddress>
+                
+                <ram:URIUniversalCommunication>
+                    <ram:URIID schemeID="0225">538006248</ram:URIID>
+                </ram:URIUniversalCommunication>
+                
+                
+                <ram:SpecifiedTaxRegistration>
+                    <ram:ID schemeID="VA">FR60538006248</ram:ID>
+                </ram:SpecifiedTaxRegistration>
+                
+            </ram:SellerTradeParty>
+            <ram:BuyerTradeParty>
+
+                <ram:GlobalID schemeID="0009">16894688721370</ram:GlobalID>
+
+
+                <ram:Name>Ferme des Saules SAS</ram:Name>
+
+                <ram:SpecifiedLegalOrganization>
+                    
+                    <ram:ID schemeID="0002">168946887</ram:ID>
+                    
+                    
+                    <ram:TradingBusinessName>Ferme des Saules</ram:TradingBusinessName>
+                    
+                </ram:SpecifiedLegalOrganization>
+
+
+                <ram:PostalTradeAddress>
+                    <ram:PostcodeCode>33000</ram:PostcodeCode>
+                    <ram:LineOne>72 avenue du Commerce</ram:LineOne>
+                    
+                    <ram:CityName>Bordeaux</ram:CityName>
+                    <ram:CountryID>FR</ram:CountryID>
+                </ram:PostalTradeAddress>
+                
+                <ram:URIUniversalCommunication>
+                    <ram:URIID schemeID="0225">168946887</ram:URIID>
+                </ram:URIUniversalCommunication>
+                
+                
+                <ram:SpecifiedTaxRegistration>
+                    <ram:ID schemeID="VA">FR56168946887</ram:ID>
+                </ram:SpecifiedTaxRegistration>
+                
+            </ram:BuyerTradeParty>
+            
+            <ram:BuyerOrderReferencedDocument>
+                <ram:IssuerAssignedID>BC-2026-988</ram:IssuerAssignedID>
+            </ram:BuyerOrderReferencedDocument>
+            
+            
+        </ram:ApplicableHeaderTradeAgreement>
+        <ram:ApplicableHeaderTradeDelivery>
+            
+            
+            <ram:ActualDeliverySupplyChainEvent>
+                <ram:OccurrenceDateTime>
+                    <udt:DateTimeString format="102">20261104</udt:DateTimeString>
+                </ram:OccurrenceDateTime>
+            </ram:ActualDeliverySupplyChainEvent>
+            
+        </ram:ApplicableHeaderTradeDelivery>
+        <ram:ApplicableHeaderTradeSettlement>
+            
+            <ram:InvoiceCurrencyCode>EUR</ram:InvoiceCurrencyCode>
+
+            
+
+            
+            <ram:SpecifiedTradeSettlementPaymentMeans>
+                <ram:TypeCode>30</ram:TypeCode>
+                
+                <ram:Information>virement</ram:Information>
+                
+                
+                <ram:PayeePartyCreditorFinancialAccount>
+                    <ram:IBANID>FR7668167189275973087134085</ram:IBANID>
+                </ram:PayeePartyCreditorFinancialAccount>
+                
+                
+            </ram:SpecifiedTradeSettlementPaymentMeans>
+            
+
+            
+            <ram:ApplicableTradeTax>
+                <ram:CalculatedAmount>380.00</ram:CalculatedAmount>
+                <ram:TypeCode>VAT</ram:TypeCode>
+                
+                <ram:BasisAmount>1900.00</ram:BasisAmount>
+                <ram:CategoryCode>S</ram:CategoryCode>
+                
+                
+                
+                <ram:RateApplicablePercent>20.00</ram:RateApplicablePercent>
+                
+            </ram:ApplicableTradeTax>
+            
+
+            
+
+            
+            <ram:SpecifiedTradeAllowanceCharge>
+                <ram:ChargeIndicator>
+                    <udt:Indicator>false</udt:Indicator>
+                </ram:ChargeIndicator>
+                <ram:ActualAmount>100.00</ram:ActualAmount>
+                
+                <ram:ReasonCode>95</ram:ReasonCode>
+                
+                
+                <ram:Reason>Remise commerciale</ram:Reason>
+                
+                <ram:CategoryTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>S</ram:CategoryCode>
+                    
+                    <ram:RateApplicablePercent>20.00</ram:RateApplicablePercent>
+                    
+                </ram:CategoryTradeTax>
+            </ram:SpecifiedTradeAllowanceCharge>
+            
+
+            
+            <ram:SpecifiedTradePaymentTerms>
+                <ram:DueDateDateTime>
+                    <udt:DateTimeString format="102">20261209</udt:DateTimeString>
+                </ram:DueDateDateTime>
+            </ram:SpecifiedTradePaymentTerms>
+            
+
+            <ram:SpecifiedTradeSettlementHeaderMonetarySummation>
+                <ram:LineTotalAmount>2000.00</ram:LineTotalAmount>
+                
+                
+                <ram:AllowanceTotalAmount>100.00</ram:AllowanceTotalAmount>
+                
+                <ram:TaxBasisTotalAmount>1900.00</ram:TaxBasisTotalAmount>
+                <ram:TaxTotalAmount currencyID="EUR">380.00</ram:TaxTotalAmount>
+                <ram:GrandTotalAmount>2280.00</ram:GrandTotalAmount>
+                <ram:TotalPrepaidAmount>2280.00</ram:TotalPrepaidAmount>
+                <ram:DuePayableAmount>0.00</ram:DuePayableAmount>
+            </ram:SpecifiedTradeSettlementHeaderMonetarySummation>
+
+
+
+            
+
+        </ram:ApplicableHeaderTradeSettlement>
+    </rsm:SupplyChainTradeTransaction>
+</rsm:CrossIndustryInvoice>

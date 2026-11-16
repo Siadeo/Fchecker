@@ -1,0 +1,1617 @@
+lab_version: 1
+generator: ezfacture-lab 0.1.0
+seed: 42
+cases:
+- id: MAT-001-A-M1-DEBITS
+  file: cii/MAT-001-A-M1-DEBITS.xml
+  level: valid
+  profile: M1
+  axes:
+    type_doc: avoir
+    nature: M
+    paiement: '1'
+    tva: debits
+    remise: document
+    acheteur: FR
+    moyen: carte
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-002-F-B4-G
+  file: cii/MAT-002-F-B4-G.xml
+  level: valid
+  profile: B4
+  axes:
+    type_doc: facture
+    nature: B
+    paiement: '4'
+    tva: G
+    remise: document
+    acheteur: HORS_UE
+    moyen: sepa
+    references: complet
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-003-F-S2-EXO
+  file: cii/MAT-003-F-S2-EXO.xml
+  level: valid
+  profile: S2
+  axes:
+    type_doc: facture
+    nature: S
+    paiement: '2'
+    tva: exo
+    remise: ligne
+    acheteur: FR
+    moyen: cheque
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-004-A-B1-K
+  file: cii/MAT-004-A-B1-K.xml
+  level: valid
+  profile: B1
+  axes:
+    type_doc: avoir
+    nature: B
+    paiement: '1'
+    tva: K
+    remise: sans
+    acheteur: UE
+    moyen: virement
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-005-F-S4-AE
+  file: cii/MAT-005-F-S4-AE.xml
+  level: valid
+  profile: S4
+  axes:
+    type_doc: facture
+    nature: S
+    paiement: '4'
+    tva: AE
+    remise: frais
+    acheteur: UE
+    moyen: aucun
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-006-A-S1-MONO
+  file: cii/MAT-006-A-S1-MONO.xml
+  level: valid
+  profile: S1
+  axes:
+    type_doc: avoir
+    nature: S
+    paiement: '1'
+    tva: mono
+    remise: frais
+    acheteur: FR
+    moyen: sepa
+    references: complet
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-007-F-M2-FRANCHISE
+  file: cii/MAT-007-F-M2-FRANCHISE.xml
+  level: valid
+  profile: M2
+  axes:
+    type_doc: facture
+    nature: M
+    paiement: '2'
+    tva: franchise
+    remise: sans
+    acheteur: FR
+    moyen: aucun
+    references: complet
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-008-A-B1-G
+  file: cii/MAT-008-A-B1-G.xml
+  level: valid
+  profile: B1
+  axes:
+    type_doc: avoir
+    nature: B
+    paiement: '1'
+    tva: G
+    remise: ligne
+    acheteur: HORS_UE
+    moyen: aucun
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-009-F-M4-MULTI
+  file: cii/MAT-009-F-M4-MULTI.xml
+  level: valid
+  profile: M4
+  axes:
+    type_doc: facture
+    nature: M
+    paiement: '4'
+    tva: multi
+    remise: ligne
+    acheteur: FR
+    moyen: virement
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-010-F-B2-G
+  file: cii/MAT-010-F-B2-G.xml
+  level: valid
+  profile: B2
+  axes:
+    type_doc: facture
+    nature: B
+    paiement: '2'
+    tva: G
+    remise: frais
+    acheteur: HORS_UE
+    moyen: carte
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-011-F-B2-K
+  file: cii/MAT-011-F-B2-K.xml
+  level: valid
+  profile: B2
+  axes:
+    type_doc: facture
+    nature: B
+    paiement: '2'
+    tva: K
+    remise: document
+    acheteur: UE
+    moyen: cheque
+    references: complet
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-012-A-S1-MULTI
+  file: cii/MAT-012-A-S1-MULTI.xml
+  level: valid
+  profile: S1
+  axes:
+    type_doc: avoir
+    nature: S
+    paiement: '1'
+    tva: multi
+    remise: sans
+    acheteur: FR
+    moyen: cheque
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-013-F-S2-MONO
+  file: cii/MAT-013-F-S2-MONO.xml
+  level: valid
+  profile: S2
+  axes:
+    type_doc: facture
+    nature: S
+    paiement: '2'
+    tva: mono
+    remise: document
+    acheteur: FR
+    moyen: virement
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-014-A-B1-AE
+  file: cii/MAT-014-A-B1-AE.xml
+  level: valid
+  profile: B1
+  axes:
+    type_doc: avoir
+    nature: B
+    paiement: '1'
+    tva: AE
+    remise: ligne
+    acheteur: FR
+    moyen: carte
+    references: complet
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-015-F-M4-DEBITS
+  file: cii/MAT-015-F-M4-DEBITS.xml
+  level: valid
+  profile: M4
+  axes:
+    type_doc: facture
+    nature: M
+    paiement: '4'
+    tva: debits
+    remise: sans
+    acheteur: FR
+    moyen: sepa
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-016-A-M1-EXO
+  file: cii/MAT-016-A-M1-EXO.xml
+  level: valid
+  profile: M1
+  axes:
+    type_doc: avoir
+    nature: M
+    paiement: '1'
+    tva: exo
+    remise: frais
+    acheteur: FR
+    moyen: virement
+    references: complet
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-017-F-B1-K
+  file: cii/MAT-017-F-B1-K.xml
+  level: valid
+  profile: B1
+  axes:
+    type_doc: facture
+    nature: B
+    paiement: '1'
+    tva: K
+    remise: ligne
+    acheteur: UE
+    moyen: sepa
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-018-A-S1-FRANCHISE
+  file: cii/MAT-018-A-S1-FRANCHISE.xml
+  level: valid
+  profile: S1
+  axes:
+    type_doc: avoir
+    nature: S
+    paiement: '1'
+    tva: franchise
+    remise: document
+    acheteur: FR
+    moyen: aucun
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-019-F-B4-EXO
+  file: cii/MAT-019-F-B4-EXO.xml
+  level: valid
+  profile: B4
+  axes:
+    type_doc: facture
+    nature: B
+    paiement: '4'
+    tva: exo
+    remise: sans
+    acheteur: FR
+    moyen: carte
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-020-F-B4-FRANCHISE
+  file: cii/MAT-020-F-B4-FRANCHISE.xml
+  level: valid
+  profile: B4
+  axes:
+    type_doc: facture
+    nature: B
+    paiement: '4'
+    tva: franchise
+    remise: frais
+    acheteur: FR
+    moyen: cheque
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-021-F-B2-MULTI
+  file: cii/MAT-021-F-B2-MULTI.xml
+  level: valid
+  profile: B2
+  axes:
+    type_doc: facture
+    nature: B
+    paiement: '2'
+    tva: multi
+    remise: frais
+    acheteur: FR
+    moyen: sepa
+    references: complet
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-022-F-M2-AE
+  file: cii/MAT-022-F-M2-AE.xml
+  level: valid
+  profile: M2
+  axes:
+    type_doc: facture
+    nature: M
+    paiement: '2'
+    tva: AE
+    remise: sans
+    acheteur: FR
+    moyen: cheque
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-023-F-B4-MONO
+  file: cii/MAT-023-F-B4-MONO.xml
+  level: valid
+  profile: B4
+  axes:
+    type_doc: facture
+    nature: B
+    paiement: '4'
+    tva: mono
+    remise: sans
+    acheteur: FR
+    moyen: carte
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-024-F-S2-DEBITS
+  file: cii/MAT-024-F-S2-DEBITS.xml
+  level: valid
+  profile: S2
+  axes:
+    type_doc: facture
+    nature: S
+    paiement: '2'
+    tva: debits
+    remise: frais
+    acheteur: FR
+    moyen: virement
+    references: complet
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-025-F-B4-G
+  file: cii/MAT-025-F-B4-G.xml
+  level: valid
+  profile: B4
+  axes:
+    type_doc: facture
+    nature: B
+    paiement: '4'
+    tva: G
+    remise: sans
+    acheteur: HORS_UE
+    moyen: cheque
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-026-F-B4-K
+  file: cii/MAT-026-F-B4-K.xml
+  level: valid
+  profile: B4
+  axes:
+    type_doc: facture
+    nature: B
+    paiement: '4'
+    tva: K
+    remise: frais
+    acheteur: UE
+    moyen: carte
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-027-A-M1-MONO
+  file: cii/MAT-027-A-M1-MONO.xml
+  level: valid
+  profile: M1
+  axes:
+    type_doc: avoir
+    nature: M
+    paiement: '1'
+    tva: mono
+    remise: ligne
+    acheteur: FR
+    moyen: aucun
+    references: complet
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-028-F-S1-MULTI
+  file: cii/MAT-028-F-S1-MULTI.xml
+  level: valid
+  profile: S1
+  axes:
+    type_doc: facture
+    nature: S
+    paiement: '1'
+    tva: multi
+    remise: document
+    acheteur: FR
+    moyen: carte
+    references: complet
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-029-A-B1-G
+  file: cii/MAT-029-A-B1-G.xml
+  level: valid
+  profile: B1
+  axes:
+    type_doc: avoir
+    nature: B
+    paiement: '1'
+    tva: G
+    remise: ligne
+    acheteur: HORS_UE
+    moyen: virement
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-030-F-M2-DEBITS
+  file: cii/MAT-030-F-M2-DEBITS.xml
+  level: valid
+  profile: M2
+  axes:
+    type_doc: facture
+    nature: M
+    paiement: '2'
+    tva: debits
+    remise: ligne
+    acheteur: FR
+    moyen: aucun
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-031-F-B1-FRANCHISE
+  file: cii/MAT-031-F-B1-FRANCHISE.xml
+  level: valid
+  profile: B1
+  axes:
+    type_doc: facture
+    nature: B
+    paiement: '1'
+    tva: franchise
+    remise: ligne
+    acheteur: FR
+    moyen: carte
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-032-A-B1-EXO
+  file: cii/MAT-032-A-B1-EXO.xml
+  level: valid
+  profile: B1
+  axes:
+    type_doc: avoir
+    nature: B
+    paiement: '1'
+    tva: exo
+    remise: document
+    acheteur: FR
+    moyen: aucun
+    references: complet
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-033-A-S1-AE
+  file: cii/MAT-033-A-S1-AE.xml
+  level: valid
+  profile: S1
+  axes:
+    type_doc: avoir
+    nature: S
+    paiement: '1'
+    tva: AE
+    remise: document
+    acheteur: FR
+    moyen: virement
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-034-A-M1-DEBITS
+  file: cii/MAT-034-A-M1-DEBITS.xml
+  level: valid
+  profile: M1
+  axes:
+    type_doc: avoir
+    nature: M
+    paiement: '1'
+    tva: debits
+    remise: sans
+    acheteur: FR
+    moyen: cheque
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-035-F-S4-AE
+  file: cii/MAT-035-F-S4-AE.xml
+  level: valid
+  profile: S4
+  axes:
+    type_doc: facture
+    nature: S
+    paiement: '4'
+    tva: AE
+    remise: sans
+    acheteur: FR
+    moyen: sepa
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-036-A-S1-FRANCHISE
+  file: cii/MAT-036-A-S1-FRANCHISE.xml
+  level: valid
+  profile: S1
+  axes:
+    type_doc: avoir
+    nature: S
+    paiement: '1'
+    tva: franchise
+    remise: frais
+    acheteur: FR
+    moyen: virement
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-037-F-M4-EXO
+  file: cii/MAT-037-F-M4-EXO.xml
+  level: valid
+  profile: M4
+  axes:
+    type_doc: facture
+    nature: M
+    paiement: '4'
+    tva: exo
+    remise: frais
+    acheteur: FR
+    moyen: sepa
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-038-A-M1-MULTI
+  file: cii/MAT-038-A-M1-MULTI.xml
+  level: valid
+  profile: M1
+  axes:
+    type_doc: avoir
+    nature: M
+    paiement: '1'
+    tva: multi
+    remise: document
+    acheteur: FR
+    moyen: aucun
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-039-F-B1-FRANCHISE
+  file: cii/MAT-039-F-B1-FRANCHISE.xml
+  level: valid
+  profile: B1
+  axes:
+    type_doc: facture
+    nature: B
+    paiement: '1'
+    tva: franchise
+    remise: ligne
+    acheteur: FR
+    moyen: sepa
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-040-A-S1-MONO
+  file: cii/MAT-040-A-S1-MONO.xml
+  level: valid
+  profile: S1
+  axes:
+    type_doc: avoir
+    nature: S
+    paiement: '1'
+    tva: mono
+    remise: document
+    acheteur: FR
+    moyen: cheque
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: MAT-041-F-B2-K
+  file: cii/MAT-041-F-B2-K.xml
+  level: valid
+  profile: B2
+  axes:
+    type_doc: facture
+    nature: B
+    paiement: '2'
+    tva: K
+    remise: frais
+    acheteur: UE
+    moyen: aucun
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: TRAP-A-IDSIREN-001
+  file: traps/TRAP-A-IDSIREN-001.xml
+  level: A
+  base: MAT-028-F-S1-MULTI
+  mutation:
+    op: model
+    field: buyer.siren
+    change: 9e chiffre +1
+  expect:
+    must:
+    - ID-SIREN
+    may:
+    - ID-TVA-SIREN
+    - ID-SIRET
+    max_severity: info
+  demo:
+    title: SIREN de l'acheteur avec une clé de Luhn fausse
+    tags:
+    - identifiants
+- id: TRAP-A-IDTVACLE-001
+  file: traps/TRAP-A-IDTVACLE-001.xml
+  level: A
+  base: MAT-028-F-S1-MULTI
+  mutation:
+    op: model
+    field: buyer.vat
+    change: clé +1
+  expect:
+    must:
+    - ID-TVA-CLE
+    may: []
+    max_severity: info
+  demo:
+    title: Numéro de TVA de l'acheteur avec une clé fausse
+    tags:
+    - identifiants
+- id: TRAP-A-ECHEANCE-001
+  file: traps/TRAP-A-ECHEANCE-001.xml
+  level: A
+  base: MAT-017-F-B1-K
+  mutation:
+    op: model
+    field: due_date
+    change: date de facture − 10 j
+  expect:
+    must:
+    - BR-FR-CO-07
+    may: []
+    max_severity: info
+  demo:
+    title: Échéance antérieure à la date de facture
+    tags:
+    - dates
+- id: TRAP-A-AVOIRREF-001
+  file: traps/TRAP-A-AVOIRREF-001.xml
+  level: A
+  base: MAT-001-A-M1-DEBITS
+  mutation:
+    op: model
+    field: invoice_reference
+    change: supprimée
+  expect:
+    must:
+    - BR-FR-CO-05
+    may: []
+    max_severity: info
+  demo:
+    title: Avoir sans référence à la facture d'origine
+    tags:
+    - avoir
+- id: TRAP-A-PAYS-001
+  file: traps/TRAP-A-PAYS-001.xml
+  level: A
+  base: MAT-017-F-B1-K
+  mutation:
+    op: model
+    field: buyer.country
+    value: XX
+  expect:
+    must:
+    - BR-CL-14
+    may: []
+    max_severity: info
+  demo:
+    title: Code pays de l'acheteur hors liste ISO 3166
+    tags:
+    - codes
+- id: TRAP-A-PMT-001
+  file: traps/TRAP-A-PMT-001.xml
+  level: A
+  base: MAT-017-F-B1-K
+  mutation:
+    op: model
+    field: notes
+    change: note PMT retirée
+  expect:
+    must:
+    - BR-FR-05
+    may: []
+    max_severity: info
+  demo:
+    title: Mention de l'indemnité forfaitaire de 40 € absente
+    tags:
+    - mentions
+- id: TRAP-B-BRCO15-001
+  file: traps/TRAP-B-BRCO15-001.xml
+  level: B
+  base: MAT-017-F-B1-K
+  mutation:
+    op: set
+    xpath: ram:GrandTotalAmount
+    value: '+0.01'
+  expect:
+    must:
+    - BR-CO-15
+    may:
+    - BR-CO-16
+    max_severity: info
+  demo:
+    title: Total TTC faux d'un centime
+    tags:
+    - totaux
+- id: TRAP-B-BRCO10-001
+  file: traps/TRAP-B-BRCO10-001.xml
+  level: B
+  base: MAT-017-F-B1-K
+  mutation:
+    op: set
+    xpath: ram:LineTotalAmount
+    value: '+0.01'
+  expect:
+    must:
+    - BR-CO-10
+    may:
+    - BR-CO-13
+    max_severity: info
+  demo:
+    title: Total HT des lignes faux d'un centime
+    tags:
+    - totaux
+- id: TRAP-B-BRCO14-001
+  file: traps/TRAP-B-BRCO14-001.xml
+  level: B
+  base: MAT-023-F-B4-MONO
+  mutation:
+    op: set
+    xpath: ram:ApplicableTradeTax/ram:CalculatedAmount
+    value: '+0.01'
+  expect:
+    must:
+    - BR-CO-14
+    may: []
+    max_severity: info
+  demo:
+    title: Montant de TVA de la ventilation faux d'un centime
+    tags:
+    - totaux
+    - tva
+- id: TRAP-B-XSDORDRE-001
+  file: traps/TRAP-B-XSDORDRE-001.xml
+  level: B
+  base: MAT-017-F-B1-K
+  mutation:
+    op: move
+    xpath: rsm:ExchangedDocument/ram:TypeCode
+    after: ram:IssueDateTime
+  expect:
+    must:
+    - XSD
+    may: []
+    max_severity: info
+  demo:
+    title: Élément hors séquence (TypeCode après IssueDateTime)
+    tags:
+    - structure
+- id: TRAP-B-DEVISE-001
+  file: traps/TRAP-B-DEVISE-001.xml
+  level: B
+  base: MAT-017-F-B1-K
+  mutation:
+    op: set
+    xpath: ram:InvoiceCurrencyCode
+    value: EUX
+  expect:
+    must:
+    - BR-CL-04
+    may:
+    - BR-FR-CO-12
+    - BR-CO-15
+    max_severity: info
+  demo:
+    title: Code devise hors liste ISO 4217
+    tags:
+    - codes
+- id: TRAP-B-TYPECODE-001
+  file: traps/TRAP-B-TYPECODE-001.xml
+  level: B
+  base: MAT-017-F-B1-K
+  mutation:
+    op: set
+    xpath: rsm:ExchangedDocument/ram:TypeCode
+    value: '999'
+  expect:
+    must:
+    - BR-CL-01
+    may:
+    - BR-FR-04
+    max_severity: info
+  demo:
+    title: Type de document hors liste UNTDID 1001
+    tags:
+    - codes
+- id: TRAP-B-TYPEFR-001
+  file: traps/TRAP-B-TYPEFR-001.xml
+  level: B
+  base: MAT-017-F-B1-K
+  mutation:
+    op: set
+    xpath: rsm:ExchangedDocument/ram:TypeCode
+    value: '325'
+  expect:
+    must:
+    - BR-FR-04
+    may: []
+    max_severity: info
+  demo:
+    title: Type de document valide en UNTDID 1001 mais exclu par la réforme
+    tags:
+    - codes
+- id: TRAP-B-NOMACHETEUR-001
+  file: traps/TRAP-B-NOMACHETEUR-001.xml
+  level: B
+  base: MAT-017-F-B1-K
+  mutation:
+    op: delete
+    xpath: ram:BuyerTradeParty/ram:Name
+  expect:
+    must:
+    - BR-07
+    may: []
+    max_severity: info
+  demo:
+    title: Nom de l'acheteur absent
+    tags:
+    - parties
+- id: TRAP-B-CADRE-001
+  file: traps/TRAP-B-CADRE-001.xml
+  level: B
+  base: MAT-017-F-B1-K
+  mutation:
+    op: set
+    xpath: ram:BusinessProcessSpecifiedDocumentContextParameter/ram:ID
+    value: S9X
+  expect:
+    must:
+    - BR-FR-08
+    may: []
+    max_severity: info
+  demo:
+    title: Cadre de facturation (BT-23) hors liste
+    tags:
+    - codes
+- id: TRAP-B-SCHEMEID-001
+  file: traps/TRAP-B-SCHEMEID-001.xml
+  level: B
+  base: MAT-017-F-B1-K
+  mutation:
+    op: set_attr
+    xpath: ram:SellerTradeParty/ram:SpecifiedLegalOrganization/ram:ID
+    attr: schemeID
+    value: '9999'
+  expect:
+    must:
+    - BR-CL-11
+    may:
+    - BR-FR-10
+    - BR-FR-09
+    max_severity: info
+  demo:
+    title: SIREN du vendeur déclaré avec un schéma inconnu
+    tags:
+    - identifiants
+- id: TRAP-A-IBAN-001
+  file: traps/TRAP-A-IBAN-001.xml
+  level: A
+  base: MAT-017-F-B1-K
+  mutation:
+    op: model
+    field: payment_means.iban
+    change: dernier chiffre +1
+  expect:
+    must:
+    - ID-IBAN
+    may: []
+    max_severity: info
+  demo:
+    title: IBAN du vendeur avec une clé mod-97 fausse
+    tags:
+    - identifiants
+    - paiement
+- id: TRAP-A-BIC-001
+  file: traps/TRAP-A-BIC-001.xml
+  level: A
+  base: MAT-017-F-B1-K
+  mutation:
+    op: model
+    field: payment_means.bic
+    value: ATLB12
+  expect:
+    must:
+    - ID-BIC
+    may: []
+    max_severity: info
+  demo:
+    title: BIC du vendeur mal formé
+    tags:
+    - identifiants
+    - paiement
+- id: TRAP-A-PERIODE-001
+  file: traps/TRAP-A-PERIODE-001.xml
+  level: A
+  base: MAT-028-F-S1-MULTI
+  mutation:
+    op: model
+    field: invoicing_period
+    change: début et fin inversés
+  expect:
+    must:
+    - BR-29
+    may: []
+    max_severity: info
+  demo:
+    title: Période de facturation dont la fin précède le début
+    tags:
+    - dates
+- id: TRAP-B-BRCO11-001
+  file: traps/TRAP-B-BRCO11-001.xml
+  level: B
+  base: MAT-028-F-S1-MULTI
+  mutation:
+    op: set
+    xpath: ram:AllowanceTotalAmount
+    value: '+0.01'
+  expect:
+    must:
+    - BR-CO-11
+    may:
+    - BR-CO-13
+    max_severity: info
+  demo:
+    title: Total des remises du document faux d'un centime
+    tags:
+    - totaux
+    - remises
+- id: TRAP-B-BRCO12-001
+  file: traps/TRAP-B-BRCO12-001.xml
+  level: B
+  base: MAT-005-F-S4-AE
+  mutation:
+    op: set
+    xpath: ram:ChargeTotalAmount
+    value: '+0.01'
+  expect:
+    must:
+    - BR-CO-12
+    may:
+    - BR-CO-13
+    max_severity: info
+  demo:
+    title: Total des charges du document faux d'un centime
+    tags:
+    - totaux
+    - remises
+- id: TRAP-B-REMISECAT-001
+  file: traps/TRAP-B-REMISECAT-001.xml
+  level: B
+  base: MAT-028-F-S1-MULTI
+  mutation:
+    op: delete
+    xpath: ram:SpecifiedTradeAllowanceCharge/ram:CategoryTradeTax/ram:CategoryCode
+  expect:
+    must:
+    - BR-32
+    may:
+    - BR-FR-15
+    - BR-S-08
+    - BR-E-08
+    - BR-AE-08
+    - BR-IC-08
+    - BR-G-08
+    max_severity: info
+  demo:
+    title: Remise du document sans catégorie de TVA
+    tags:
+    - remises
+    - tva
+- id: TRAP-B-REMISEMOTIF-001
+  file: traps/TRAP-B-REMISEMOTIF-001.xml
+  level: B
+  base: MAT-028-F-S1-MULTI
+  mutation:
+    op: delete
+    xpath: ram:SpecifiedTradeAllowanceCharge/ram:Reason|ram:ReasonCode
+  expect:
+    must:
+    - BR-33
+    may:
+    - BR-CO-21
+    max_severity: info
+  demo:
+    title: Remise du document sans motif ni code motif
+    tags:
+    - remises
+- id: TRAP-B-FRAISMOTIF-001
+  file: traps/TRAP-B-FRAISMOTIF-001.xml
+  level: B
+  base: MAT-005-F-S4-AE
+  mutation:
+    op: delete
+    xpath: ram:SpecifiedTradeAllowanceCharge/ram:Reason|ram:ReasonCode
+  expect:
+    must:
+    - BR-38
+    may:
+    - BR-CO-22
+    max_severity: info
+  demo:
+    title: Charge du document sans motif ni code motif
+    tags:
+    - remises
+- id: TRAP-B-MOYENCODE-001
+  file: traps/TRAP-B-MOYENCODE-001.xml
+  level: B
+  base: MAT-017-F-B1-K
+  mutation:
+    op: set
+    xpath: ram:SpecifiedTradeSettlementPaymentMeans/ram:TypeCode
+    value: '99'
+  expect:
+    must:
+    - BR-CL-16
+    may: []
+    max_severity: info
+  demo:
+    title: Moyen de paiement hors liste UNTDID 4461
+    tags:
+    - codes
+    - paiement
+- id: TRAP-B-SANSIBAN-001
+  file: traps/TRAP-B-SANSIBAN-001.xml
+  level: B
+  base: MAT-017-F-B1-K
+  mutation:
+    op: delete
+    xpath: ram:PayeePartyCreditorFinancialAccount
+  expect:
+    must:
+    - CII-SR-470
+    may: []
+    max_severity: info
+  demo:
+    title: Virement sans compte du bénéficiaire
+    tags:
+    - paiement
+- id: FX-003-F-S2-EXO
+  file: facturx/FX-003-F-S2-EXO.pdf
+  level: valid
+  format: facturx
+  base: MAT-003-F-S2-EXO
+  profile: S2
+  axes:
+    type_doc: facture
+    nature: S
+    paiement: '2'
+    tva: exo
+    remise: ligne
+    acheteur: FR
+    moyen: cheque
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: FX-004-A-B1-K
+  file: facturx/FX-004-A-B1-K.pdf
+  level: valid
+  format: facturx
+  base: MAT-004-A-B1-K
+  profile: B1
+  axes:
+    type_doc: avoir
+    nature: B
+    paiement: '1'
+    tva: K
+    remise: sans
+    acheteur: UE
+    moyen: virement
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: FX-007-F-M2-FRANCHISE
+  file: facturx/FX-007-F-M2-FRANCHISE.pdf
+  level: valid
+  format: facturx
+  base: MAT-007-F-M2-FRANCHISE
+  profile: M2
+  axes:
+    type_doc: facture
+    nature: M
+    paiement: '2'
+    tva: franchise
+    remise: sans
+    acheteur: FR
+    moyen: aucun
+    references: complet
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: FX-008-A-B1-G
+  file: facturx/FX-008-A-B1-G.pdf
+  level: valid
+  format: facturx
+  base: MAT-008-A-B1-G
+  profile: B1
+  axes:
+    type_doc: avoir
+    nature: B
+    paiement: '1'
+    tva: G
+    remise: ligne
+    acheteur: HORS_UE
+    moyen: aucun
+    references: commande
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: FX-009-F-M4-MULTI
+  file: facturx/FX-009-F-M4-MULTI.pdf
+  level: valid
+  format: facturx
+  base: MAT-009-F-M4-MULTI
+  profile: M4
+  axes:
+    type_doc: facture
+    nature: M
+    paiement: '4'
+    tva: multi
+    remise: ligne
+    acheteur: FR
+    moyen: virement
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: FX-014-A-B1-AE
+  file: facturx/FX-014-A-B1-AE.pdf
+  level: valid
+  format: facturx
+  base: MAT-014-A-B1-AE
+  profile: B1
+  axes:
+    type_doc: avoir
+    nature: B
+    paiement: '1'
+    tva: AE
+    remise: ligne
+    acheteur: FR
+    moyen: carte
+    references: complet
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: FX-015-F-M4-DEBITS
+  file: facturx/FX-015-F-M4-DEBITS.pdf
+  level: valid
+  format: facturx
+  base: MAT-015-F-M4-DEBITS
+  profile: M4
+  axes:
+    type_doc: facture
+    nature: M
+    paiement: '4'
+    tva: debits
+    remise: sans
+    acheteur: FR
+    moyen: sepa
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: FX-023-F-B4-MONO
+  file: facturx/FX-023-F-B4-MONO.pdf
+  level: valid
+  format: facturx
+  base: MAT-023-F-B4-MONO
+  profile: B4
+  axes:
+    type_doc: facture
+    nature: B
+    paiement: '4'
+    tva: mono
+    remise: sans
+    acheteur: FR
+    moyen: carte
+    references: aucune
+  expect:
+    must: []
+    may: []
+    max_severity: info
+- id: TRAP-C-COH01
+  file: traps/TRAP-C-COH01.pdf
+  level: C
+  format: facturx
+  base: MAT-009-F-M4-MULTI
+  mutation:
+    op: cellule
+    cible:
+    - fact_num_fact
+    valeur:
+    - FAC-2026-0001
+  expect:
+    must:
+    - COH-01
+    may: []
+    max_severity: info
+  demo:
+    title: N° de facture du PDF différent de celui du XML
+    tags:
+    - cohérence
+- id: TRAP-C-COH02
+  file: traps/TRAP-C-COH02.pdf
+  level: C
+  format: facturx
+  base: MAT-009-F-M4-MULTI
+  mutation:
+    op: cellule
+    cible:
+    - date_facture
+    valeur:
+    - '+1'
+  expect:
+    must:
+    - COH-02
+    may: []
+    max_severity: info
+  demo:
+    title: Date de facture du PDF décalée d'un jour
+    tags:
+    - cohérence
+    - dates
+- id: TRAP-C-COH03
+  file: traps/TRAP-C-COH03.pdf
+  level: C
+  format: facturx
+  base: MAT-009-F-M4-MULTI
+  mutation:
+    op: cellule
+    cible:
+    - fact_date_echeance
+    valeur:
+    - '+15'
+  expect:
+    must:
+    - COH-03
+    may: []
+    max_severity: info
+  demo:
+    title: Échéance du PDF repoussée de 15 jours
+    tags:
+    - cohérence
+    - dates
+- id: TRAP-C-COH04
+  file: traps/TRAP-C-COH04.pdf
+  level: C
+  format: facturx
+  base: MAT-009-F-M4-MULTI
+  mutation:
+    op: cellule
+    cible:
+    - total_ht
+    valeur:
+    - '+10'
+  expect:
+    must:
+    - COH-04
+    may:
+    - COH-06
+    - COH-07
+    max_severity: info
+  demo:
+    title: Total HT du PDF faux de 10 €
+    tags:
+    - cohérence
+    - totaux
+- id: TRAP-C-COH05
+  file: traps/TRAP-C-COH05.pdf
+  level: C
+  format: facturx
+  base: MAT-009-F-M4-MULTI
+  mutation:
+    op: cellule
+    cible:
+    - total_tva
+    valeur:
+    - +0,01
+  expect:
+    must:
+    - COH-05
+    may:
+    - COH-06
+    - COH-07
+    max_severity: info
+  demo:
+    title: Total TVA du PDF faux d'un centime
+    tags:
+    - cohérence
+    - totaux
+- id: TRAP-C-COH06
+  file: traps/TRAP-C-COH06.pdf
+  level: C
+  format: facturx
+  base: MAT-009-F-M4-MULTI
+  mutation:
+    op: cellule
+    cible:
+    - total_ttc
+    valeur:
+    - '+1'
+  expect:
+    must:
+    - COH-06
+    may:
+    - COH-07
+    max_severity: info
+  demo:
+    title: Total TTC du PDF faux d'un euro
+    tags:
+    - cohérence
+    - totaux
+- id: TRAP-C-COH07
+  file: traps/TRAP-C-COH07.pdf
+  level: C
+  format: facturx
+  base: MAT-009-F-M4-MULTI
+  mutation:
+    op: cellule
+    cible:
+    - net_a_payer
+    valeur:
+    - -0,10
+  expect:
+    must:
+    - COH-07
+    may: []
+    max_severity: info
+  demo:
+    title: Net à payer du PDF faux de 10 centimes
+    tags:
+    - cohérence
+    - totaux
+- id: TRAP-C-COH08
+  file: traps/TRAP-C-COH08.pdf
+  level: C
+  format: facturx
+  base: MAT-009-F-M4-MULTI
+  mutation:
+    op: cellule
+    cible:
+    - seller_party_legal_entity_id
+    - seller_tax_scheme_id
+    - RCS
+    valeur:
+    - 'Siret : 69990098171440'
+    - 'TVA : FR21699900981'
+    - 'RCS : Lyon B 699900981'
+  expect:
+    must:
+    - COH-08
+    may: []
+    max_severity: info
+  demo:
+    title: SIREN du vendeur sur le PDF différent de celui du XML
+    tags:
+    - cohérence
+    - identifiants
+- id: TRAP-C-COH09
+  file: traps/TRAP-C-COH09.pdf
+  level: C
+  format: facturx
+  base: MAT-003-F-S2-EXO
+  mutation:
+    op: cellule
+    cible:
+    - buyer_party_legal_entity_id
+    - buyer_tax_scheme_id
+    valeur:
+    - '65655908527446'
+    - FR20656559085
+  expect:
+    must:
+    - COH-09
+    may: []
+    max_severity: info
+  demo:
+    title: SIREN du client sur le PDF différent de celui du XML
+    tags:
+    - cohérence
+    - identifiants
+- id: TRAP-C-PDFA02
+  file: traps/TRAP-C-PDFA02.pdf
+  level: C
+  format: facturx
+  base: MAT-009-F-M4-MULTI
+  mutation:
+    op: pdf
+    cible:
+    - sans_xmp
+    valeur: []
+  expect:
+    must:
+    - PDFA-02
+    may: []
+    max_severity: info
+  demo:
+    title: 'Métadonnées XMP retirées : PDF/A non déclaré'
+    tags:
+    - pdfa
+- id: TRAP-C-PROFILXMP
+  file: traps/TRAP-C-PROFILXMP.pdf
+  level: C
+  format: facturx
+  base: MAT-009-F-M4-MULTI
+  mutation:
+    op: pdf
+    cible:
+    - niveau_xmp
+    valeur:
+    - BASIC
+  expect:
+    must:
+    - FR-PROFIL-02
+    may: []
+    max_severity: info
+  demo:
+    title: Niveau Factur-X déclaré BASIC dans le XMP pour un XML EN 16931
+    tags:
+    - pdfa
+    - profil
+- id: TRAP-C-PDFA08
+  file: traps/TRAP-C-PDFA08.pdf
+  level: C
+  format: facturx
+  base: MAT-009-F-M4-MULTI
+  mutation:
+    op: pdf
+    cible:
+    - piece_jointe
+    valeur:
+    - facture.xml
+  expect:
+    must:
+    - PDFA-08
+    may:
+    - PDFA-09
+    max_severity: info
+  demo:
+    title: Pièce jointe XML mal nommée (facture.xml au lieu de factur-x.xml)
+    tags:
+    - pdfa
+- id: TRAP-C-PDFAPART
+  file: traps/TRAP-C-PDFAPART.pdf
+  level: C
+  format: facturx
+  base: MAT-009-F-M4-MULTI
+  mutation:
+    op: pdf
+    cible:
+    - partie_pdfa
+    valeur:
+    - '1'
+  expect:
+    must:
+    - PDFA-02
+    may: []
+    max_severity: info
+  demo:
+    title: PDF déclaré PDF/A-1 (qui interdit les pièces jointes)
+    tags:
+    - pdfa
+- id: TRAP-C-PDFA09
+  file: traps/TRAP-C-PDFA09.pdf
+  level: C
+  format: facturx
+  base: MAT-009-F-M4-MULTI
+  mutation:
+    op: pdf
+    cible:
+    - type_xmp
+    valeur:
+    - ORDER
+  expect:
+    must:
+    - PDFA-09
+    may: []
+    max_severity: info
+  demo:
+    title: Type de document déclaré ORDER dans le XMP Factur-X au lieu de INVOICE
+    tags:
+    - pdfa

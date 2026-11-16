@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Rapport de contrôle — {{ r.document.name }}</title>
+<style>
+  @page { size: A4; margin: 14mm; }
+  :root { --ink:#1d2330; --muted:#667085; --line:#d7dbe2; --soft:#f4f5f7;
+          --fatal:#9f1239; --error:#d92d20; --warning:#b54708; --info:#1f5eff; --ok:#067647; }
+  body { font-family: "Segoe UI", Inter, Arial, sans-serif; color: var(--ink); font-size: 9.5pt; margin: 0; padding: 24px; }
+  h1 { font-size: 18pt; margin: 0 0 4px; }
+  h2 { font-size: 11pt; margin: 22px 0 8px; border-bottom: 1px solid var(--ink); padding-bottom: 4px; }
+  .muted { color: var(--muted); }
+  .verdict { display: inline-block; padding: 4px 12px; border-radius: 12px; font-weight: 600; color: #fff; margin: 8px 0; }
+  .v-ok { background: var(--ok); } .v-warn { background: var(--warning); } .v-ko { background: var(--error); }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 24px; }
+  .counts span { margin-right: 14px; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-size: 8pt; text-transform: uppercase; letter-spacing: .05em; color: var(--muted);
+       border-bottom: 1px solid var(--ink); padding: 5px 6px; }
+  td { padding: 5px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .sev { font-weight: 600; white-space: nowrap; }
+  .FATAL { color: var(--fatal); } .ERROR { color: var(--error); } .WARNING { color: var(--warning); } .INFO { color: var(--info); }
+  .expl { color: var(--muted); font-size: 8.5pt; margin-top: 3px; }
+  pre { background: var(--soft); padding: 6px 8px; border-radius: 4px; white-space: pre-wrap; font-size: 8pt; margin: 4px 0 0; }
+  footer { margin-top: 22px; font-size: 8pt; color: var(--muted); }
+</style>
+</head>
+<body>
+<h1>Rapport de contrôle de facture électronique</h1>
+<div class="muted">{{ r.document.name }} — généré le {{ r.generated_at.strftime("%d/%m/%Y à %H:%M") }} par Fchecker {{ r.tool_version }}</div>
+{% set cls = "v-ko" if r.verdict == "Non conforme" else ("v-warn" if "avertissements" in r.verdict else "v-ok") %}
+<div class="verdict {{ cls }}">{{ r.verdict }}</div>
+<div class="counts">
+  <span class="FATAL">Bloquant : {{ r.counts[Severity.FATAL] }}</span>
+  <span class="ERROR">Erreurs : {{ r.counts[Severity.ERROR] }}</span>
+  <span class="WARNING">Avertissements : {{ r.counts[Severity.WARNING] }}</span>
+  <span class="INFO">Informations : {{ r.counts[Severity.INFO] }}</span>
+</div>
+
+<h2>Document</h2>
+<div class="grid">
+  <div>Facture n° <b>{{ r.invoice.number }}</b> du {{ r.invoice.issue_date }}</div>
+  <div>Total TTC : <b>{{ r.invoice.total_with_vat }}</b></div>
+  <div>Vendeur : {{ r.invoice.seller }}</div>
+  <div>Acheteur : {{ r.invoice.buyer }}</div>
+  <div>Format : {{ r.document.format }}{% if r.document.profile_label %} · {{ r.document.profile_label }}{% endif %}{% if r.document.pdfa %} · {{ r.document.pdfa }}{% endif %}</div>
+  <div class="muted">SHA-256 : {{ r.document.sha256[:32] }}…</div>
+</div>
+<p class="muted">Contrôles exécutés : {{ r.tools | join(", ") }}.
+{% if r.rule_packs %}Référentiels : {% for k, v in r.rule_packs.items() %}{{ k }} {{ v }}{{ ", " if not loop.last }}{% endfor %}.{% endif %}</p>
+
+{% if r.checks %}
+<h2>Validateur</h2>
+<table><thead><tr><th>Contrôle</th><th>Erreurs</th><th>Avertissements</th><th>Informations</th></tr></thead><tbody>
+{% for c in r.checks %}
+  <tr><td>{{ c.label }}</td>
+      <td class="ERROR">{{ c.counts[Severity.FATAL] + c.counts[Severity.ERROR] }}</td>
+      <td class="WARNING">{{ c.counts[Severity.WARNING] }}</td><td class="INFO">{{ c.counts[Severity.INFO] }}</td></tr>
+{% endfor %}
+</tbody></table>
+{% endif %}
+
+<h2>Constats ({{ r.findings | length }})</h2>
+{% if r.findings %}
+<table><thead><tr><th>Gravité</th><th>Règle</th><th>Champ</th><th>Ligne</th><th>Constat</th></tr></thead><tbody>
+{% for f in r.findings %}
+  <tr>
+    <td class="sev {{ f.severity.name }}">{{ f.severity.label }}</td>
+    <td class="sev">{{ f.rule_id }}</td><td style="white-space:nowrap">{{ f.bt or "" }}</td><td>{{ f.line or "" }}</td>
+    <td>{{ f.display_message }}
+      {% if f.explanation %}<div class="expl">{{ f.explanation }}</div>{% endif %}
+      {% if f.suggestion %}<div class="expl"><b>Correction :</b> {{ f.suggestion }}</div>{% endif %}
+      {% if f.example %}<pre>{{ f.example }}</pre>{% endif %}
+    </td>
+  </tr>
+{% endfor %}
+</tbody></table>
+{% else %}<p>Aucun constat.</p>{% endif %}
+
+{% if r.mentions %}
+<h2>Mentions obligatoires</h2>
+<table><thead><tr><th>Mention</th><th>État</th><th>Détail</th><th>Base légale</th></tr></thead><tbody>
+{% for m in r.mentions %}
+  <tr><td>{{ m.label }}</td><td>{{ m.status.value }}</td><td>{{ m.detail }}</td><td class="muted">{{ m.legal }}</td></tr>
+{% endfor %}
+</tbody></table>
+{% endif %}
+
+{% if r.consistency %}
+<h2>Cohérence PDF ↔ XML</h2>
+<table><thead><tr><th>Champ</th><th>XML</th><th>PDF</th><th>État</th></tr></thead><tbody>
+{% for c in r.consistency %}
+  <tr><td>{{ c.label }} ({{ c.bt }})</td><td>{{ c.xml }}</td><td>{{ c.pdf }}</td><td>{{ c.status }}</td></tr>
+{% endfor %}
+</tbody></table>
+{% endif %}
+
+<footer>Le contrôle PDF/A est structurel (non certifiant). La vérification dans l'annuaire Peppol reflète l'état de l'annuaire à la date du rapport.</footer>
+</body>
+</html>

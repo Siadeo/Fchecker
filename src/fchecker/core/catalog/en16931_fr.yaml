@@ -1,0 +1,1001 @@
+# Traduction française des règles EN 16931, réalisée pour Fchecker.
+# Traduite uniquement à partir des messages anglais des artefacts de validation CEN/TC 434
+# (https://github.com/ConnectingEurope/eInvoicing-EN16931, version indiquée dans core/referentiels.py).
+# Œuvre dérivée de ces artefacts : ce fichier est distribué sous licence EUPL-1.2
+# (https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12).
+#
+# Règles de rédaction : ne JAMAIS reprendre la traduction française de la norme (protégée) ni
+# les libellés de l'annexe 7 des spécifications DGFiP qui en dérivent ; traduire depuis l'anglais en
+# employant le glossaire ci-dessous. en_sha = 12 premiers caractères du SHA-256 du message anglais traduit
+# (tools/check_translations.py signale les règles dont l'anglais a changé).
+glossary:
+  BG-3: Référence à une facture antérieure
+  BG-4: Vendeur
+  BG-5: Adresse postale du vendeur
+  BG-8: Adresse postale de l'acheteur
+  BG-10: Bénéficiaire du paiement
+  BG-11: Représentant fiscal du vendeur
+  BG-12: Adresse postale du représentant fiscal
+  BG-14: Période de facturation
+  BG-15: Adresse de livraison
+  BG-16: Instructions de paiement
+  BG-17: Virement
+  BG-18: Carte de paiement
+  BG-19: Prélèvement
+  BG-20: Remise sur le document
+  BG-21: Frais sur le document
+  BG-22: Totaux de la facture
+  BG-23: Récapitulatif de TVA
+  BG-24: Pièce justificative jointe
+  BG-25: Ligne de facture
+  BG-26: Période de la ligne
+  BG-27: Remise sur la ligne
+  BG-28: Frais sur la ligne
+  BG-29: Prix de l'article
+  BG-30: TVA de la ligne
+  BG-31: Description de l'article
+  BG-32: Attribut d'article
+  BT-1: Numéro de facture
+  BT-2: Date d'émission
+  BT-3: Code du type de facture
+  BT-5: Devise de la facture
+  BT-6: Devise de déclaration de la TVA
+  BT-7: Date d'exigibilité de la TVA
+  BT-8: Code d'exigibilité de la TVA
+  BT-17: Référence du marché ou du lot
+  BT-24: Identifiant de spécification
+  BT-25: Numéro de la facture antérieure
+  BT-27: Nom du vendeur
+  BT-29: Identifiant du vendeur
+  BT-30: Identifiant légal du vendeur
+  BT-31: Numéro de TVA du vendeur
+  BT-32: Identifiant fiscal du vendeur
+  BT-34: Adresse électronique du vendeur
+  BT-40: Code pays du vendeur
+  BT-44: Nom de l'acheteur
+  BT-47: Identifiant légal de l'acheteur
+  BT-48: Numéro de TVA de l'acheteur
+  BT-49: Adresse électronique de l'acheteur
+  BT-55: Code pays de l'acheteur
+  BT-59: Nom du bénéficiaire du paiement
+  BT-62: Nom du représentant fiscal
+  BT-63: Numéro de TVA du représentant fiscal
+  BT-69: Code pays du représentant fiscal
+  BT-72: Date de livraison effective
+  BT-73: Début de la période de facturation
+  BT-74: Fin de la période de facturation
+  BT-80: Code pays de livraison
+  BT-81: Code du moyen de paiement
+  BT-82: Libellé du moyen de paiement
+  BT-83: Référence de paiement
+  BT-84: Identifiant du compte de paiement
+  BT-92: Montant de la remise sur le document
+  BT-93: Assiette de la remise sur le document
+  BT-95: Catégorie de TVA de la remise sur le document
+  BT-96: Taux de TVA de la remise sur le document
+  BT-97: Motif de la remise sur le document
+  BT-98: Code du motif de la remise sur le document
+  BT-99: Montant des frais sur le document
+  BT-100: Assiette des frais sur le document
+  BT-102: Catégorie de TVA des frais sur le document
+  BT-103: Taux de TVA des frais sur le document
+  BT-104: Motif des frais sur le document
+  BT-105: Code du motif des frais sur le document
+  BT-106: Total des montants nets de ligne
+  BT-107: Total des remises sur le document
+  BT-108: Total des frais sur le document
+  BT-109: Total HT de la facture
+  BT-110: Total de TVA de la facture
+  BT-111: Total de TVA en devise de déclaration
+  BT-112: Total TTC de la facture
+  BT-113: Montant déjà payé
+  BT-114: Arrondi
+  BT-115: Net à payer
+  BT-116: Base HT de la catégorie de TVA
+  BT-117: Montant de TVA de la catégorie
+  BT-118: Code de catégorie de TVA
+  BT-119: Taux de la catégorie de TVA
+  BT-120: Motif d'exonération de TVA (texte)
+  BT-121: Code du motif d'exonération de TVA
+  BT-122: Référence de la pièce justificative
+  BT-126: Identifiant de ligne
+  BT-129: Quantité facturée
+  BT-130: Unité de la quantité facturée
+  BT-131: Montant net de la ligne
+  BT-134: Début de la période de la ligne
+  BT-135: Fin de la période de la ligne
+  BT-136: Montant de la remise sur la ligne
+  BT-137: Assiette de la remise sur la ligne
+  BT-139: Motif de la remise sur la ligne
+  BT-140: Code du motif de la remise sur la ligne
+  BT-141: Montant des frais sur la ligne
+  BT-142: Assiette des frais sur la ligne
+  BT-144: Motif des frais sur la ligne
+  BT-145: Code du motif des frais sur la ligne
+  BT-146: Prix net unitaire de l'article
+  BT-148: Prix brut unitaire de l'article
+  BT-151: Catégorie de TVA de l'article
+  BT-152: Taux de TVA de l'article
+  BT-153: Nom de l'article
+  BT-157: Identifiant normalisé de l'article
+  BT-158: Code de classification de l'article
+  BT-160: Nom de l'attribut d'article
+  BT-161: Valeur de l'attribut d'article
+rules:
+  BR-01:
+    title: La facture doit indiquer un identifiant de spécification (BT-24).
+    en_sha: a4aa3939c207
+  BR-02:
+    title: La facture doit porter un numéro (BT-1).
+    en_sha: 2a415bf67996
+  BR-03:
+    title: La facture doit porter une date d'émission (BT-2).
+    en_sha: f7250b5508be
+  BR-04:
+    title: La facture doit indiquer le code de son type (BT-3).
+    en_sha: 2d7f8077a8e9
+  BR-05:
+    title: La facture doit indiquer sa devise (BT-5).
+    en_sha: 3ebafe9d3405
+  BR-06:
+    title: La facture doit indiquer le nom du vendeur (BT-27).
+    en_sha: aff192f05362
+  BR-07:
+    title: La facture doit indiquer le nom de l'acheteur (BT-44).
+    en_sha: 019e097d8f3e
+  BR-08:
+    title: L'adresse postale du vendeur (BG-5) est obligatoire.
+    en_sha: d0af8c375c45
+  BR-09:
+    title: L'adresse postale du vendeur (BG-5) doit comporter un code pays (BT-40).
+    en_sha: 69c92ce36a40
+  BR-10:
+    title: L'adresse postale de l'acheteur (BG-8) est obligatoire.
+    en_sha: 3839a803ec7b
+  BR-11:
+    title: L'adresse postale de l'acheteur doit comporter un code pays (BT-55).
+    en_sha: 405f7166b789
+  BR-12:
+    title: La facture doit indiquer le total des montants nets de ligne (BT-106).
+    en_sha: 403f93d0db96
+  BR-13:
+    title: La facture doit indiquer son total HT (BT-109).
+    en_sha: 8b6f4c972f9f
+  BR-14:
+    title: La facture doit indiquer son total TTC (BT-112).
+    en_sha: c0f8939923c7
+  BR-15:
+    title: La facture doit indiquer le net à payer (BT-115).
+    en_sha: 7f7a49784599
+  BR-16:
+    title: La facture doit comporter au moins une ligne (BG-25).
+    en_sha: e3a9b27f7061
+  BR-17:
+    title: Lorsque le bénéficiaire du paiement (BG-10) n'est pas le vendeur (BG-4), son nom (BT-59) doit figurer sur la facture.
+    en_sha: 20e03f95947e
+  BR-18:
+    title: Lorsque le vendeur (BG-4) passe par un représentant fiscal (BG-11), le nom de ce représentant (BT-62) doit figurer
+      sur la facture.
+    en_sha: 7ff9c4874106
+  BR-19:
+    title: Lorsque le vendeur (BG-4) passe par un représentant fiscal (BG-11), l'adresse postale de ce représentant (BG-12)
+      doit figurer sur la facture.
+    en_sha: 120bf35ff0e1
+  BR-20:
+    title: Lorsque le vendeur (BG-4) passe par un représentant fiscal (BG-11), l'adresse postale de ce représentant (BG-12)
+      doit comporter un code pays (BT-69).
+    en_sha: 4249afb909e9
+  BR-21:
+    title: Chaque ligne (BG-25) doit avoir un identifiant (BT-126).
+    en_sha: aacd08aa415c
+  BR-22:
+    title: Chaque ligne (BG-25) doit indiquer une quantité facturée (BT-129).
+    en_sha: 00e5eab7a78c
+  BR-23:
+    title: Chaque ligne (BG-25) doit indiquer l'unité de la quantité facturée (BT-130).
+    en_sha: 7d076bcc8cac
+  BR-24:
+    title: Chaque ligne (BG-25) doit indiquer son montant net (BT-131).
+    en_sha: 0d3a5f80eb0c
+  BR-25:
+    title: Chaque ligne (BG-25) doit indiquer le nom de l'article (BT-153).
+    en_sha: 6a5bd6400c1a
+  BR-26:
+    title: Chaque ligne (BG-25) doit indiquer le prix net unitaire de l'article (BT-146).
+    en_sha: 98234b764344
+  BR-27:
+    title: Le prix net unitaire de l'article (BT-146) ne peut pas être négatif.
+    en_sha: d2bf12b20ada
+  BR-28:
+    title: Le prix brut unitaire de l'article (BT-148) ne peut pas être négatif.
+    en_sha: 53f29baae5b5
+  BR-29:
+    title: Lorsque la période de facturation a un début (BT-73) et une fin (BT-74), la fin ne peut pas précéder le début.
+    en_sha: a66d55b25778
+  BR-30:
+    title: Lorsque la période d'une ligne a un début (BT-134) et une fin (BT-135), la fin ne peut pas précéder le début.
+    en_sha: e82151daf898
+  BR-31:
+    title: Chaque remise sur le document (BG-20) doit indiquer son montant (BT-92).
+    en_sha: 6bf6c5219fe3
+  BR-32:
+    title: Chaque remise sur le document (BG-20) doit indiquer sa catégorie de TVA (BT-95).
+    en_sha: 8f4334d89f02
+  BR-33:
+    title: Chaque remise sur le document (BG-20) doit indiquer un motif, en clair (BT-97) ou codé (BT-98).
+    en_sha: 033cd9a98cbe
+  BR-36:
+    title: Chaque frais sur le document (BG-21) doit indiquer son montant (BT-99).
+    en_sha: 67bb126a582e
+  BR-37:
+    title: Chaque frais sur le document (BG-21) doit indiquer sa catégorie de TVA (BT-102).
+    en_sha: b7f0091f3dc5
+  BR-38:
+    title: Chaque frais sur le document (BG-21) doit indiquer un motif, en clair (BT-104) ou codé (BT-105).
+    en_sha: 6bf854052974
+  BR-41:
+    title: Chaque remise sur une ligne (BG-27) doit indiquer son montant (BT-136).
+    en_sha: f7233dd21a13
+  BR-42:
+    title: Chaque remise sur une ligne (BG-27) doit indiquer un motif, en clair (BT-139) ou codé (BT-140).
+    en_sha: c6d70163e973
+  BR-43:
+    title: Chaque frais sur une ligne (BG-28) doit indiquer son montant (BT-141).
+    en_sha: 264cdc8dd533
+  BR-44:
+    title: Chaque frais sur une ligne (BG-28) doit indiquer un motif, en clair (BT-144) ou codé (BT-145).
+    en_sha: dd3899e632a1
+  BR-45:
+    title: Chaque groupe du récapitulatif de TVA (BG-23) doit indiquer sa base HT (BT-116).
+    en_sha: 270cbe16cb8e
+  BR-46:
+    title: Chaque groupe du récapitulatif de TVA (BG-23) doit indiquer son montant de TVA (BT-117).
+    en_sha: 5ec6c00107ab
+  BR-47:
+    title: Chaque groupe du récapitulatif de TVA (BG-23) doit être identifié par un code de catégorie (BT-118).
+    en_sha: d9b58b92458b
+  BR-48:
+    title: Chaque groupe du récapitulatif de TVA (BG-23) doit indiquer son taux (BT-119), sauf pour une facture hors du champ
+      de la TVA.
+    en_sha: 564a27052d11
+  BR-49:
+    title: Les instructions de paiement (BG-16) doivent préciser le code du moyen de paiement (BT-81).
+    en_sha: a3a63e8071f9
+  BR-50:
+    title: Lorsque la facture prévoit un paiement par virement (BG-16), l'identifiant du compte à créditer (BT-84) doit être
+      indiqué.
+    en_sha: 2cd8c6bd5c0e
+  BR-51:
+    title: 'Pour respecter les normes de sécurité des paiements par carte, la facture ne doit jamais comporter le numéro complet
+      de la carte (BT-97) : au plus les 6 premiers et les 4 derniers chiffres, selon le PCI Security Standards Council.'
+    en_sha: f7de53bf1ee3
+  BR-52:
+    title: Chaque pièce justificative jointe (BG-24) doit avoir une référence (BT-122).
+    en_sha: f7a855a4ef09
+  BR-53:
+    title: Si la TVA est aussi exprimée dans une devise de déclaration (BT-6), le total de TVA dans cette devise (BT-111)
+      est obligatoire.
+    en_sha: 1f79e71e0c46
+  BR-54:
+    title: Chaque attribut d'article (BG-32) doit avoir un nom (BT-160) et une valeur (BT-161).
+    en_sha: 23b447cc7ba3
+  BR-55:
+    title: Toute référence à une facture antérieure (BG-3) doit donner le numéro de cette facture (BT-25).
+    en_sha: 4a5995fb6f65
+  BR-56:
+    title: Le représentant fiscal du vendeur (BG-11) doit indiquer son numéro de TVA (BT-63).
+    en_sha: 6489dc6ad2b1
+  BR-57:
+    title: L'adresse de livraison (BG-15) doit comporter un code pays (BT-80).
+    en_sha: d59a60949a5b
+  BR-61:
+    title: Pour un paiement par virement (SEPA, national ou international hors SEPA) selon le code du moyen de paiement (BT-81),
+      l'identifiant du compte à créditer (BT-84) est obligatoire.
+    en_sha: 05f6bbc7886e
+  BR-62:
+    title: L'adresse électronique du vendeur (BT-34) doit préciser son schéma d'identification.
+    en_sha: 164a942805ca
+  BR-63:
+    title: L'adresse électronique de l'acheteur (BT-49) doit préciser son schéma d'identification.
+    en_sha: e194990e9d7a
+  BR-64:
+    title: L'identifiant normalisé de l'article (BT-157) doit préciser son schéma d'identification.
+    en_sha: 5a2ebe3ad355
+  BR-65:
+    title: Le code de classification de l'article (BT-158) doit préciser son schéma d'identification.
+    en_sha: 78c67b5992f0
+  BR-AE-01:
+    title: Si une ligne, une remise ou des frais sur le document relèvent de la catégorie de TVA « autoliquidation » (AE)
+      (BT-151, BT-95 ou BT-102), le récapitulatif de TVA (BG-23) doit comporter exactement un groupe de cette catégorie (BT-118).
+    en_sha: 7db719da4514
+  BR-AE-02:
+    title: Si une ligne (BG-25) relève de la catégorie « autoliquidation » (AE) (BT-151), la facture doit indiquer le numéro
+      de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant fiscal (BT-63), ainsi
+      que le numéro de TVA (BT-48) ou l'identifiant légal (BT-47) de l'acheteur.
+    en_sha: d9aa75843b1b
+  BR-AE-03:
+    title: Si une remise sur le document (BG-20) relève de la catégorie « autoliquidation » (AE) (BT-95), la facture doit
+      indiquer le numéro de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant
+      fiscal (BT-63), ainsi que le numéro de TVA (BT-48) ou l'identifiant légal (BT-47) de l'acheteur.
+    en_sha: 72f86a38d574
+  BR-AE-04:
+    title: Si des frais sur le document (BG-21) relève de la catégorie « autoliquidation » (AE) (BT-102), la facture doit
+      indiquer le numéro de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant
+      fiscal (BT-63), ainsi que le numéro de TVA (BT-48) ou l'identifiant légal (BT-47) de l'acheteur.
+    en_sha: 953c12792a13
+  BR-AE-05:
+    title: Pour une ligne (BG-25) de catégorie « autoliquidation » (AE) (BT-151), le taux de TVA (BT-152) doit être nul (0).
+    en_sha: 8e4bed6f9373
+  BR-AE-06:
+    title: Pour une remise sur le document (BG-20) de catégorie « autoliquidation » (AE) (BT-95), le taux de TVA (BT-96) doit
+      être nul (0).
+    en_sha: 54b4fe066a9f
+  BR-AE-07:
+    title: Pour des frais sur le document (BG-21) de catégorie « autoliquidation » (AE) (BT-102), le taux de TVA (BT-103)
+      doit être nul (0).
+    en_sha: 60312fd7edaf
+  BR-AE-08:
+    title: 'Dans le groupe de catégorie « autoliquidation » (AE) du récapitulatif de TVA (BG-23), la base HT (BT-116) doit
+      valoir : montants nets des lignes (BT-131), moins remises (BT-92) et plus frais (BT-99) sur le document, en ne retenant
+      que cette catégorie (BT-151, BT-95, BT-102).'
+    en_sha: 36756a67f71b
+  BR-AE-09:
+    title: Dans le groupe de catégorie « autoliquidation » (AE) du récapitulatif de TVA (BG-23), le montant de TVA (BT-117)
+      doit être nul (0).
+    en_sha: 50e91d24c21f
+  BR-AE-10:
+    title: Le groupe de catégorie « autoliquidation » (AE) du récapitulatif de TVA (BG-23) doit indiquer le motif d'exonération
+      correspondant, codé (BT-121) ou en clair (BT-120) « autoliquidation » (ou son équivalent dans une autre langue).
+    en_sha: a68adf2110c0
+  BR-AF-01:
+    title: Si une ligne, une remise ou des frais sur le document relèvent de la catégorie de TVA « IGIC (Canaries) » (AF)
+      (BT-151, BT-95 ou BT-102), le récapitulatif de TVA (BG-23) doit comporter au moins un groupe de cette catégorie (BT-118).
+    en_sha: 88fae56a0cbb
+  BR-AF-02:
+    title: Si une ligne (BG-25) relève de la catégorie « IGIC (Canaries) » (AF) (BT-151), la facture doit indiquer le numéro
+      de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant fiscal (BT-63).
+    en_sha: f89731ac4917
+  BR-AF-03:
+    title: Si une remise sur le document (BG-20) relève de la catégorie « IGIC (Canaries) » (AF) (BT-95), la facture doit
+      indiquer le numéro de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant
+      fiscal (BT-63).
+    en_sha: f1a0a2643c54
+  BR-AF-04:
+    title: Si des frais sur le document (BG-21) relève de la catégorie « IGIC (Canaries) » (AF) (BT-102), la facture doit
+      indiquer le numéro de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant
+      fiscal (BT-63).
+    en_sha: 1692d1fedfa0
+  BR-AF-05:
+    title: Pour une ligne (BG-25) de catégorie « IGIC (Canaries) » (AF) (BT-151), le taux de TVA (BT-152) doit être strictement
+      positif.
+    en_sha: 6554d039b7ae
+  BR-AF-06:
+    title: Pour une remise sur le document (BG-20) de catégorie « IGIC (Canaries) » (AF) (BT-95), le taux de TVA (BT-96) doit
+      être nul ou positif.
+    en_sha: b47cd797cfc2
+  BR-AF-07:
+    title: Pour des frais sur le document (BG-21) de catégorie « IGIC (Canaries) » (AF) (BT-102), le taux de TVA (BT-103)
+      doit être nul ou positif.
+    en_sha: 909933f1d41b
+  BR-AF-08:
+    title: 'Pour chaque taux (BT-119) de la catégorie « IGIC (Canaries) » (AF), la base HT (BT-116) du groupe correspondant
+      du récapitulatif de TVA (BG-23) doit valoir : montants nets des lignes (BT-131), plus frais (BT-99) et moins remises
+      (BT-92) sur le document, en ne retenant que cette catégorie (BT-151, BT-102, BT-95) et ce taux (BT-152, BT-103, BT-96).'
+    en_sha: ab0e325858d3
+  BR-AF-09:
+    title: Dans le groupe de catégorie « IGIC (Canaries) » (AF) du récapitulatif de TVA (BG-23), le montant de TVA (BT-117)
+      doit être égal à la base HT (BT-116) multipliée par le taux (BT-119).
+    en_sha: da0699782ba7
+  BR-AF-10:
+    title: Le groupe de catégorie « IGIC (Canaries) » (AF) du récapitulatif de TVA (BG-23) ne doit comporter aucun motif d'exonération,
+      ni codé (BT-121) ni en clair (BT-120).
+    en_sha: 2986d31b0229
+  BR-AG-01:
+    title: Si une ligne, une remise ou des frais sur le document relèvent de la catégorie de TVA « IPSI (Ceuta et Melilla)
+      » (AG) (BT-151, BT-95 ou BT-102), le récapitulatif de TVA (BG-23) doit comporter au moins un groupe de cette catégorie
+      (BT-118).
+    en_sha: 1f39b49bb207
+  BR-AG-02:
+    title: Si une ligne (BG-25) relève de la catégorie « IPSI (Ceuta et Melilla) » (AG) (BT-151), la facture doit indiquer
+      le numéro de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant fiscal (BT-63).
+    en_sha: 6aa4edd070f8
+  BR-AG-03:
+    title: Si une remise sur le document (BG-20) relève de la catégorie « IPSI (Ceuta et Melilla) » (AG) (BT-95), la facture
+      doit indiquer le numéro de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant
+      fiscal (BT-63).
+    en_sha: 3e36f82056a9
+  BR-AG-04:
+    title: Si des frais sur le document (BG-21) relève de la catégorie « IPSI (Ceuta et Melilla) » (AG) (BT-102), la facture
+      doit indiquer le numéro de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant
+      fiscal (BT-63).
+    en_sha: afaaca1075b4
+  BR-AG-05:
+    title: Pour une ligne (BG-25) de catégorie « IPSI (Ceuta et Melilla) » (AG) (BT-151), le taux de TVA (BT-152) doit être
+      nul ou positif.
+    en_sha: cdb6428632ec
+  BR-AG-06:
+    title: Pour une remise sur le document (BG-20) de catégorie « IPSI (Ceuta et Melilla) » (AG) (BT-95), le taux de TVA (BT-96)
+      doit être nul ou positif.
+    en_sha: 3dae2397ae08
+  BR-AG-07:
+    title: Pour des frais sur le document (BG-21) de catégorie « IPSI (Ceuta et Melilla) » (AG) (BT-102), le taux de TVA (BT-103)
+      doit être nul ou positif.
+    en_sha: c4af60a6a0f8
+  BR-AG-08:
+    title: 'Pour chaque taux (BT-119) de la catégorie « IPSI (Ceuta et Melilla) » (AG), la base HT (BT-116) du groupe correspondant
+      du récapitulatif de TVA (BG-23) doit valoir : montants nets des lignes (BT-131), plus frais (BT-99) et moins remises
+      (BT-92) sur le document, en ne retenant que cette catégorie (BT-151, BT-102, BT-95) et ce taux (BT-152, BT-103, BT-96).'
+    en_sha: 6198471402dd
+  BR-AG-09:
+    title: Dans le groupe de catégorie « IPSI (Ceuta et Melilla) » (AG) du récapitulatif de TVA (BG-23), le montant de TVA
+      (BT-117) doit être égal à la base HT (BT-116) multipliée par le taux (BT-119).
+    en_sha: eb772fc57c0e
+  BR-AG-10:
+    title: Le groupe de catégorie « IPSI (Ceuta et Melilla) » (AG) du récapitulatif de TVA (BG-23) ne doit comporter aucun
+      motif d'exonération, ni codé (BT-121) ni en clair (BT-120).
+    en_sha: 1e66e299735a
+  BR-B-01:
+    title: Une facture qui utilise la catégorie de TVA « paiement fractionné » (BT-151, BT-95 ou BT-102) doit être une facture
+      nationale italienne.
+    en_sha: e42db1c326fe
+  BR-B-02:
+    title: Une facture qui comporte la catégorie « paiement fractionné » sur une ligne (BG-25), une remise (BG-20) ou des
+      frais (BG-21) ne peut pas comporter, ailleurs, la catégorie « taux normal » (BT-151, BT-95 ou BT-102).
+    en_sha: 0705e9609c1b
+  BR-CL-01:
+    title: Le code du type de document doit appartenir aux codes de facture et d'avoir de la liste UNTDID 1001.
+    en_sha: 96b821250560
+  BR-CL-03:
+    title: L'attribut currencyID doit être un code de devise ISO 4217 (3 lettres).
+    en_sha: 2baa61145a1b
+  BR-CL-04:
+    title: La devise de la facture doit être un code ISO 4217 (3 lettres).
+    en_sha: 8b17468d89db
+  BR-CL-05:
+    title: La devise de déclaration de la TVA doit être un code ISO 4217 (3 lettres).
+    en_sha: 7b17df80dc2f
+  BR-CL-06:
+    title: Le code d'exigibilité de la TVA doit faire partie des valeurs retenues de la liste UNTDID 2475.
+    en_sha: b5500edd3e25
+  BR-CL-07:
+    title: Le schéma d'identification d'un objet facturé doit appartenir au sous-ensemble autorisé de la liste UNTDID 1153.
+    en_sha: 6e016e729184
+  BR-CL-08:
+    title: Le code sujet d'une note doit appartenir au sous-ensemble autorisé de la liste UNTDID 4451.
+    en_sha: 9ed13bf6f9dd
+  BR-CL-10:
+    title: Le schéma de tout identifiant doit être un code de la liste ISO 6523 ICD.
+    en_sha: 5005654d9b70
+  BR-CL-11:
+    title: Le schéma de tout identifiant d'immatriculation doit être un code de la liste ISO 6523 ICD.
+    en_sha: 3957b495cb2b
+  BR-CL-13:
+    title: Le schéma du code de classification d'un article doit appartenir à la liste UNTDID 7143.
+    en_sha: 545873bfa82f
+  BR-CL-14:
+    title: Les codes pays de la facture doivent être des codes ISO 3166-1.
+    en_sha: c2e187b8afb5
+  BR-CL-15:
+    title: Les codes pays de la facture doivent être des codes ISO 3166-1.
+    en_sha: c2e187b8afb5
+  BR-CL-16:
+    title: Les moyens de paiement de la facture doivent être codés selon la liste UNTDID 4461.
+    en_sha: 11b9195eeded
+  BR-CL-17:
+    title: Les catégories de TVA de la facture doivent être codées selon la liste UNCL 5305.
+    en_sha: a84809a14c86
+  BR-CL-18:
+    title: Les catégories de TVA de la facture doivent être codées selon la liste UNCL 5305.
+    en_sha: a84809a14c86
+  BR-CL-19:
+    title: Les motifs de remise codés doivent appartenir à la liste UNCL 5189.
+    en_sha: e9faf90b2a88
+  BR-CL-20:
+    title: Les motifs de frais codés doivent appartenir à la liste UNCL 7161.
+    en_sha: 3b5fbba4d390
+  BR-CL-21:
+    title: Le schéma de l'identifiant normalisé d'un article doit appartenir à la liste ISO 6523 ICD.
+    en_sha: 9e5ea9b05205
+  BR-CL-22:
+    title: Le code du motif d'exonération de TVA doit appartenir à la liste CEF VATEX.
+    en_sha: 23eb5510eb36
+  BR-CL-23:
+    title: Les codes d'unité doivent suivre la recommandation 20 de la CEE-ONU, complétée par la recommandation 21.
+    en_sha: 50be3b30e378
+  BR-CL-24:
+    title: Le type de fichier d'une pièce jointe doit être un type MIME (attribut mimeCode).
+    en_sha: 118587983a48
+  BR-CL-25:
+    title: Le schéma des adresses électroniques est à choisir dans la liste CEF EAS.
+    en_sha: 16a225cecab4
+  BR-CL-26:
+    title: Le schéma de l'identifiant du lieu de livraison est à choisir dans la liste ISO 6523 ICD.
+    en_sha: 5db351a51e74
+  BR-CO-03:
+    title: 'La date d''exigibilité de la TVA (BT-7) et son code (BT-8) s''excluent : un seul des deux peut être indiqué.'
+    en_sha: 660606226f37
+  BR-CO-04:
+    title: Chaque ligne (BG-25) doit indiquer la catégorie de TVA de l'article (BT-151).
+    en_sha: b921f3615d64
+  BR-CO-05:
+    title: Pour une remise sur le document, le motif codé (BT-98) et le motif en clair (BT-97) doivent désigner le même type
+      de remise.
+    en_sha: 85cad0dac4ec
+  BR-CO-06:
+    title: Pour des frais sur le document, le motif codé (BT-105) et le motif en clair (BT-104) doivent désigner le même type
+      de frais.
+    en_sha: 4320c17783be
+  BR-CO-07:
+    title: Pour une remise sur une ligne, le motif codé (BT-140) et le motif en clair (BT-139) doivent désigner le même type
+      de remise.
+    en_sha: 3e5b318120f6
+  BR-CO-08:
+    title: Pour des frais sur une ligne, le motif codé (BT-145) et le motif en clair (BT-144) doivent désigner le même type
+      de frais.
+    en_sha: ce09e90822f0
+  BR-CO-09:
+    title: Les numéros de TVA du vendeur (BT-31), de son représentant fiscal (BT-63) et de l'acheteur (BT-48) doivent commencer
+      par le code ISO 3166-1 alpha-2 du pays qui les a attribués ; la Grèce peut utiliser le préfixe « EL ».
+    en_sha: 5dffb7250192
+  BR-CO-10:
+    title: Total des montants nets de ligne (BT-106) = somme des montants nets des lignes (BT-131).
+    en_sha: 06aed3ac05fb
+  BR-CO-11:
+    title: Total des remises sur le document (BT-107) = somme des montants des remises sur le document (BT-92).
+    en_sha: 6e3c91377e2e
+  BR-CO-12:
+    title: Total des frais sur le document (BT-108) = somme des montants des frais sur le document (BT-99).
+    en_sha: 17840d3180bd
+  BR-CO-13:
+    title: Total HT de la facture (BT-109) = somme des montants nets des lignes (BT-131) − total des remises sur le document
+      (BT-107) + total des frais sur le document (BT-108).
+    en_sha: f4d4fb0f8111
+  BR-CO-14:
+    title: Total de TVA de la facture (BT-110) = somme des montants de TVA par catégorie (BT-117).
+    en_sha: f56ec233f5c2
+  BR-CO-15:
+    title: Total TTC de la facture (BT-112) = total HT (BT-109) + total de TVA (BT-110).
+    en_sha: 0b15047cc0f2
+  BR-CO-16:
+    title: Net à payer (BT-115) = total TTC (BT-112) − montant déjà payé (BT-113) + arrondi (BT-114).
+    en_sha: 297c8d84134f
+  BR-CO-17:
+    title: Montant de TVA d'une catégorie (BT-117) = base HT (BT-116) × taux (BT-119) / 100, arrondi à deux décimales.
+    en_sha: 75c1e7f47799
+  BR-CO-18:
+    title: La facture doit comporter au moins un groupe de récapitulatif de TVA (BG-23).
+    en_sha: d70cc0647a7f
+  BR-CO-19:
+    title: Si une période de facturation (BG-14) est indiquée, elle doit avoir un début (BT-73), une fin (BT-74), ou les deux.
+    en_sha: 503efad3f341
+  BR-CO-20:
+    title: Si une période de ligne (BG-26) est indiquée, elle doit avoir un début (BT-134), une fin (BT-135), ou les deux.
+    en_sha: 74867a57f94b
+  BR-CO-21:
+    title: Chaque remise sur le document (BG-20) doit indiquer un motif en clair (BT-97), un motif codé (BT-98), ou les deux.
+    en_sha: 8fbb2860c75c
+  BR-CO-22:
+    title: Chaque frais sur le document (BG-21) doit indiquer un motif en clair (BT-104), un motif codé (BT-105), ou les deux.
+    en_sha: a6941e5db824
+  BR-CO-23:
+    title: Chaque remise sur une ligne (BG-27) doit indiquer un motif en clair (BT-139), un motif codé (BT-140), ou les deux.
+    en_sha: 2003d654429c
+  BR-CO-24:
+    title: Chaque frais sur une ligne (BG-28) doit indiquer un motif en clair (BT-144), un motif codé (BT-145), ou les deux.
+    en_sha: 85f61e321f0b
+  BR-CO-26:
+    title: Pour que l'acheteur puisse identifier automatiquement son fournisseur, la facture doit indiquer l'identifiant du
+      vendeur (BT-29), son identifiant légal (BT-30) ou son numéro de TVA (BT-31).
+    en_sha: 542974d80aa0
+  BR-DEC-01:
+    title: 'Montant de la remise sur le document (BT-92) : deux décimales au maximum.'
+    en_sha: 9a28138d948a
+  BR-DEC-02:
+    title: 'Assiette de la remise sur le document (BT-93) : deux décimales au maximum.'
+    en_sha: 517406f92b39
+  BR-DEC-05:
+    title: 'Montant des frais sur le document (BT-99) : deux décimales au maximum.'
+    en_sha: dfa36d1a9ed8
+  BR-DEC-06:
+    title: 'Assiette des frais sur le document (BT-100) : deux décimales au maximum.'
+    en_sha: c966fb644460
+  BR-DEC-09:
+    title: 'Total des montants nets de ligne (BT-106) : deux décimales au maximum.'
+    en_sha: 53f406011f7b
+  BR-DEC-10:
+    title: 'Total des remises sur le document (BT-107) : deux décimales au maximum.'
+    en_sha: 848ea663354c
+  BR-DEC-11:
+    title: 'Total des frais sur le document (BT-108) : deux décimales au maximum.'
+    en_sha: a6fd7d595224
+  BR-DEC-12:
+    title: 'Total HT de la facture (BT-109) : deux décimales au maximum.'
+    en_sha: d981db6bd035
+  BR-DEC-13:
+    title: 'Total de TVA de la facture (BT-110) : deux décimales au maximum.'
+    en_sha: 7740fefe1b15
+  BR-DEC-14:
+    title: 'Total TTC de la facture (BT-112) : deux décimales au maximum.'
+    en_sha: dea53bed39e3
+  BR-DEC-15:
+    title: 'Total de TVA en devise de déclaration (BT-111) : deux décimales au maximum.'
+    en_sha: 93f81aa2d14a
+  BR-DEC-16:
+    title: 'Montant déjà payé (BT-113) : deux décimales au maximum.'
+    en_sha: a6fc21b48426
+  BR-DEC-17:
+    title: 'Arrondi (BT-114) : deux décimales au maximum.'
+    en_sha: 5b9d612d98aa
+  BR-DEC-18:
+    title: 'Net à payer (BT-115) : deux décimales au maximum.'
+    en_sha: 02a59b2abf51
+  BR-DEC-19:
+    title: 'Base HT de la catégorie de TVA (BT-116) : deux décimales au maximum.'
+    en_sha: ee39b0eedcf7
+  BR-DEC-20:
+    title: 'Montant de TVA de la catégorie (BT-117) : deux décimales au maximum.'
+    en_sha: 17dfd978635c
+  BR-DEC-23:
+    title: 'Montant net de la ligne (BT-131) : deux décimales au maximum.'
+    en_sha: 2ea8f3d52114
+  BR-DEC-24:
+    title: 'Montant de la remise sur la ligne (BT-136) : deux décimales au maximum.'
+    en_sha: f3e806ffc850
+  BR-DEC-25:
+    title: 'Assiette de la remise sur la ligne (BT-137) : deux décimales au maximum.'
+    en_sha: 5d9e8def112c
+  BR-DEC-27:
+    title: 'Montant des frais sur la ligne (BT-141) : deux décimales au maximum.'
+    en_sha: 5e8bca3f163d
+  BR-DEC-28:
+    title: 'Assiette des frais sur la ligne (BT-142) : deux décimales au maximum.'
+    en_sha: 6beb8d79174f
+  BR-E-01:
+    title: Si une ligne, une remise ou des frais sur le document relèvent de la catégorie de TVA « exonéré » (E) (BT-151,
+      BT-95 ou BT-102), le récapitulatif de TVA (BG-23) doit comporter exactement un groupe de cette catégorie (BT-118).
+    en_sha: 7d280fc115f7
+  BR-E-02:
+    title: Si une ligne (BG-25) relève de la catégorie « exonéré » (E) (BT-151), la facture doit indiquer le numéro de TVA
+      du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant fiscal (BT-63).
+    en_sha: 4aa9043413be
+  BR-E-03:
+    title: Si une remise sur le document (BG-20) relève de la catégorie « exonéré » (E) (BT-95), la facture doit indiquer
+      le numéro de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant fiscal (BT-63).
+    en_sha: a252a5287bd3
+  BR-E-04:
+    title: Si des frais sur le document (BG-21) relève de la catégorie « exonéré » (E) (BT-102), la facture doit indiquer
+      le numéro de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant fiscal (BT-63).
+    en_sha: 4322a6d7f612
+  BR-E-05:
+    title: Pour une ligne (BG-25) de catégorie « exonéré » (E) (BT-151), le taux de TVA (BT-152) doit être nul (0).
+    en_sha: af63a6ee9bb7
+  BR-E-06:
+    title: Pour une remise sur le document (BG-20) de catégorie « exonéré » (E) (BT-95), le taux de TVA (BT-96) doit être
+      nul (0).
+    en_sha: 74e0842bc7fa
+  BR-E-07:
+    title: Pour des frais sur le document (BG-21) de catégorie « exonéré » (E) (BT-102), le taux de TVA (BT-103) doit être
+      nul (0).
+    en_sha: d66800bfbc5e
+  BR-E-08:
+    title: 'Dans le groupe de catégorie « exonéré » (E) du récapitulatif de TVA (BG-23), la base HT (BT-116) doit valoir :
+      montants nets des lignes (BT-131), moins remises (BT-92) et plus frais (BT-99) sur le document, en ne retenant que cette
+      catégorie (BT-151, BT-95, BT-102).'
+    en_sha: 0b032def4e1e
+  BR-E-09:
+    title: Dans le groupe de catégorie « exonéré » (E) du récapitulatif de TVA (BG-23), le montant de TVA (BT-117) doit être
+      nul (0).
+    en_sha: 94000c24f530
+  BR-E-10:
+    title: Le groupe de catégorie « exonéré » (E) du récapitulatif de TVA (BG-23) doit indiquer un motif d'exonération, codé
+      (BT-121) ou en clair (BT-120).
+    en_sha: ff30617fd517
+  BR-G-01:
+    title: Si une ligne, une remise ou des frais sur le document relèvent de la catégorie de TVA « exportation hors UE » (G)
+      (BT-151, BT-95 ou BT-102), le récapitulatif de TVA (BG-23) doit comporter exactement un groupe de cette catégorie (BT-118).
+    en_sha: 548b7543e403
+  BR-G-02:
+    title: Si une ligne (BG-25) relève de la catégorie « exportation hors UE » (G) (BT-151), la facture doit indiquer le numéro
+      de TVA du vendeur (BT-31) ou celui de son représentant fiscal (BT-63).
+    en_sha: f1fdd620c9dd
+  BR-G-03:
+    title: Si une remise sur le document (BG-20) relève de la catégorie « exportation hors UE » (G) (BT-95), la facture doit
+      indiquer le numéro de TVA du vendeur (BT-31) ou celui de son représentant fiscal (BT-63).
+    en_sha: b38da067c17d
+  BR-G-04:
+    title: Si des frais sur le document (BG-21) relève de la catégorie « exportation hors UE » (G) (BT-102), la facture doit
+      indiquer le numéro de TVA du vendeur (BT-31) ou celui de son représentant fiscal (BT-63).
+    en_sha: e8f202553c7c
+  BR-G-05:
+    title: Pour une ligne (BG-25) de catégorie « exportation hors UE » (G) (BT-151), le taux de TVA (BT-152) doit être nul
+      (0).
+    en_sha: 1f3454e93fc1
+  BR-G-06:
+    title: Pour une remise sur le document (BG-20) de catégorie « exportation hors UE » (G) (BT-95), le taux de TVA (BT-96)
+      doit être nul (0).
+    en_sha: ac1b52698b29
+  BR-G-07:
+    title: Pour des frais sur le document (BG-21) de catégorie « exportation hors UE » (G) (BT-102), le taux de TVA (BT-103)
+      doit être nul (0).
+    en_sha: 85378e98995c
+  BR-G-08:
+    title: 'Dans le groupe de catégorie « exportation hors UE » (G) du récapitulatif de TVA (BG-23), la base HT (BT-116) doit
+      valoir : montants nets des lignes (BT-131), moins remises (BT-92) et plus frais (BT-99) sur le document, en ne retenant
+      que cette catégorie (BT-151, BT-95, BT-102).'
+    en_sha: 491489754cb3
+  BR-G-09:
+    title: Dans le groupe de catégorie « exportation hors UE » (G) du récapitulatif de TVA (BG-23), le montant de TVA (BT-117)
+      doit être nul (0).
+    en_sha: 697bffff8a4e
+  BR-G-10:
+    title: Le groupe de catégorie « exportation hors UE » (G) du récapitulatif de TVA (BG-23) doit indiquer le motif d'exonération
+      correspondant, codé (BT-121) ou en clair (BT-120) « exportation hors UE » (ou son équivalent dans une autre langue).
+    en_sha: fc62e164b1b5
+  BR-IC-01:
+    title: Si une ligne, une remise ou des frais sur le document relèvent de la catégorie de TVA « livraison intracommunautaire
+      » (K) (BT-151, BT-95 ou BT-102), le récapitulatif de TVA (BG-23) doit comporter exactement un groupe de cette catégorie
+      (BT-118).
+    en_sha: 648246992a78
+  BR-IC-02:
+    title: Si une ligne (BG-25) relève de la catégorie « livraison intracommunautaire » (K) (BT-151), la facture doit indiquer
+      le numéro de TVA du vendeur (BT-31) ou celui de son représentant fiscal (BT-63), ainsi que le numéro de TVA de l'acheteur
+      (BT-48).
+    en_sha: 52b4f381727f
+  BR-IC-03:
+    title: Si une remise sur le document (BG-20) relève de la catégorie « livraison intracommunautaire » (K) (BT-95), la facture
+      doit indiquer le numéro de TVA du vendeur (BT-31) ou celui de son représentant fiscal (BT-63), ainsi que le numéro de
+      TVA de l'acheteur (BT-48).
+    en_sha: ebbc245ea16b
+  BR-IC-04:
+    title: Si des frais sur le document (BG-21) relève de la catégorie « livraison intracommunautaire » (K) (BT-102), la facture
+      doit indiquer le numéro de TVA du vendeur (BT-31) ou celui de son représentant fiscal (BT-63), ainsi que le numéro de
+      TVA de l'acheteur (BT-48).
+    en_sha: 614eddfa1798
+  BR-IC-05:
+    title: Pour une ligne (BG-25) de catégorie « livraison intracommunautaire » (K) (BT-151), le taux de TVA (BT-152) doit
+      être nul (0).
+    en_sha: f875ee3a8ef0
+  BR-IC-06:
+    title: Pour une remise sur le document (BG-20) de catégorie « livraison intracommunautaire » (K) (BT-95), le taux de TVA
+      (BT-96) doit être nul (0).
+    en_sha: 8435d78fdb66
+  BR-IC-07:
+    title: Pour des frais sur le document (BG-21) de catégorie « livraison intracommunautaire » (K) (BT-102), le taux de TVA
+      (BT-103) doit être nul (0).
+    en_sha: 6ef698e9e549
+  BR-IC-08:
+    title: 'Dans le groupe de catégorie « livraison intracommunautaire » (K) du récapitulatif de TVA (BG-23), la base HT (BT-116)
+      doit valoir : montants nets des lignes (BT-131), moins remises (BT-92) et plus frais (BT-99) sur le document, en ne
+      retenant que cette catégorie (BT-151, BT-95, BT-102).'
+    en_sha: 8a0cd9b8623b
+  BR-IC-09:
+    title: Dans le groupe de catégorie « livraison intracommunautaire » (K) du récapitulatif de TVA (BG-23), le montant de
+      TVA (BT-117) doit être nul (0).
+    en_sha: bdf1dc21c8db
+  BR-IC-10:
+    title: Le groupe de catégorie « livraison intracommunautaire » (K) du récapitulatif de TVA (BG-23) doit indiquer le motif
+      d'exonération correspondant, codé (BT-121) ou en clair (BT-120) « livraison intracommunautaire » (ou son équivalent
+      dans une autre langue).
+    en_sha: 86938398b211
+  BR-IC-11:
+    title: Pour une livraison intracommunautaire (catégorie K dans le récapitulatif de TVA, BG-23), la facture doit indiquer
+      la date de livraison effective (BT-72) ou la période de facturation (BG-14).
+    en_sha: 9d3a09baf6d4
+  BR-IC-12:
+    title: Pour une livraison intracommunautaire (catégorie K dans le récapitulatif de TVA, BG-23), la facture doit indiquer
+      le code pays de livraison (BT-80).
+    en_sha: 9c0a857a30a5
+  BR-O-01:
+    title: Si une ligne, une remise ou des frais sur le document relèvent de la catégorie de TVA « hors champ de la TVA »
+      (O) (BT-151, BT-95 ou BT-102), le récapitulatif de TVA (BG-23) doit comporter exactement un groupe de cette catégorie
+      (BT-118).
+    en_sha: 960268a5c8de
+  BR-O-02:
+    title: Si une ligne (BG-25) relève de la catégorie « hors champ de la TVA » (O) (BT-151), la facture ne doit indiquer
+      ni le numéro de TVA du vendeur (BT-31), ni celui de son représentant fiscal (BT-63), ni celui de l'acheteur (BT-48).
+    en_sha: 91cf2601f240
+  BR-O-03:
+    title: Si une remise sur le document (BG-20) relève de la catégorie « hors champ de la TVA » (O) (BT-95), la facture ne
+      doit indiquer ni le numéro de TVA du vendeur (BT-31), ni celui de son représentant fiscal (BT-63), ni celui de l'acheteur
+      (BT-48).
+    en_sha: 5a1d3dce3eb6
+  BR-O-04:
+    title: Si des frais sur le document (BG-21) relève de la catégorie « hors champ de la TVA » (O) (BT-102), la facture ne
+      doit indiquer ni le numéro de TVA du vendeur (BT-31), ni celui de son représentant fiscal (BT-63), ni celui de l'acheteur
+      (BT-48).
+    en_sha: 61aa2a4d0f77
+  BR-O-05:
+    title: Pour une ligne (BG-25) de catégorie « hors champ de la TVA » (O) (BT-151), aucun taux de TVA (BT-152) ne doit être
+      indiqué.
+    en_sha: d923b543ab88
+  BR-O-06:
+    title: Pour une remise sur le document (BG-20) de catégorie « hors champ de la TVA » (O) (BT-95), aucun taux de TVA (BT-96)
+      ne doit être indiqué.
+    en_sha: 7283e7716119
+  BR-O-07:
+    title: Pour des frais sur le document (BG-21) de catégorie « hors champ de la TVA » (O) (BT-102), aucun taux de TVA (BT-103)
+      ne doit être indiqué.
+    en_sha: f9037f70c03e
+  BR-O-08:
+    title: 'Dans le groupe de catégorie « hors champ de la TVA » (O) du récapitulatif de TVA (BG-23), la base HT (BT-116)
+      doit valoir : montants nets des lignes (BT-131), moins remises (BT-92) et plus frais (BT-99) sur le document, en ne
+      retenant que cette catégorie (BT-151, BT-95, BT-102).'
+    en_sha: 964ed234a3d4
+  BR-O-09:
+    title: Dans le groupe de catégorie « hors champ de la TVA » (O) du récapitulatif de TVA (BG-23), le montant de TVA (BT-117)
+      doit être nul (0).
+    en_sha: a4d91d673930
+  BR-O-10:
+    title: Le groupe de catégorie « hors champ de la TVA » (O) du récapitulatif de TVA (BG-23) doit indiquer le motif d'exonération
+      correspondant, codé (BT-121) ou en clair (BT-120) « hors champ de la TVA » (ou son équivalent dans une autre langue).
+    en_sha: 6fa53fec8e13
+  BR-O-11:
+    title: Une facture dont le récapitulatif de TVA comporte la catégorie « hors champ de la TVA » (O) ne peut pas comporter
+      d'autre groupe de récapitulatif (BG-23).
+    en_sha: d6874a3fc93f
+  BR-O-12:
+    title: Une facture dont le récapitulatif de TVA comporte la catégorie « hors champ de la TVA » (O) ne peut comporter que
+      des lignes (BG-25) de cette même catégorie (BT-151).
+    en_sha: a51205e727a5
+  BR-O-13:
+    title: Une facture dont le récapitulatif de TVA comporte la catégorie « hors champ de la TVA » (O) ne peut comporter que
+      des remises sur le document (BG-20) de cette même catégorie (BT-95).
+    en_sha: fea0bd1d2895
+  BR-O-14:
+    title: Une facture dont le récapitulatif de TVA comporte la catégorie « hors champ de la TVA » (O) ne peut comporter que
+      des frais sur le document (BG-21) de cette même catégorie (BT-102).
+    en_sha: fc519c3ad27a
+  BR-S-01:
+    title: Si une ligne, une remise ou des frais sur le document relèvent de la catégorie de TVA « taux normal » (S) (BT-151,
+      BT-95 ou BT-102), le récapitulatif de TVA (BG-23) doit comporter au moins un groupe de cette catégorie (BT-118).
+    en_sha: df9a5a2cf92f
+  BR-S-02:
+    title: Si une ligne (BG-25) relève de la catégorie « taux normal » (S) (BT-151), la facture doit indiquer le numéro de
+      TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant fiscal (BT-63).
+    en_sha: ded20c49f1ec
+  BR-S-03:
+    title: Si une remise sur le document (BG-20) relève de la catégorie « taux normal » (S) (BT-95), la facture doit indiquer
+      le numéro de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant fiscal (BT-63).
+    en_sha: 61853c5211ce
+  BR-S-04:
+    title: Si des frais sur le document (BG-21) relève de la catégorie « taux normal » (S) (BT-102), la facture doit indiquer
+      le numéro de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant fiscal (BT-63).
+    en_sha: 8e862b004d60
+  BR-S-05:
+    title: Pour une ligne (BG-25) de catégorie « taux normal » (S) (BT-151), le taux de TVA (BT-152) doit être strictement
+      positif.
+    en_sha: 24c5d4589cbd
+  BR-S-06:
+    title: Pour une remise sur le document (BG-20) de catégorie « taux normal » (S) (BT-95), le taux de TVA (BT-96) doit être
+      strictement positif.
+    en_sha: 9c59dc655efa
+  BR-S-07:
+    title: Pour des frais sur le document (BG-21) de catégorie « taux normal » (S) (BT-102), le taux de TVA (BT-103) doit
+      être strictement positif.
+    en_sha: 7639a5745466
+  BR-S-08:
+    title: 'Pour chaque taux (BT-119) de la catégorie « taux normal » (S), la base HT (BT-116) du groupe correspondant du
+      récapitulatif de TVA (BG-23) doit valoir : montants nets des lignes (BT-131), plus frais (BT-99) et moins remises (BT-92)
+      sur le document, en ne retenant que cette catégorie (BT-151, BT-102, BT-95) et ce taux (BT-152, BT-103, BT-96).'
+    en_sha: 671469ee71ae
+  BR-S-09:
+    title: Dans le groupe de catégorie « taux normal » (S) du récapitulatif de TVA (BG-23), le montant de TVA (BT-117) doit
+      être égal à la base HT (BT-116) multipliée par le taux (BT-119).
+    en_sha: 31143c612612
+  BR-S-10:
+    title: Le groupe de catégorie « taux normal » (S) du récapitulatif de TVA (BG-23) ne doit comporter aucun motif d'exonération,
+      ni codé (BT-121) ni en clair (BT-120).
+    en_sha: c04e53edda6e
+  BR-Z-01:
+    title: Si une ligne, une remise ou des frais sur le document relèvent de la catégorie de TVA « taux zéro » (Z) (BT-151,
+      BT-95 ou BT-102), le récapitulatif de TVA (BG-23) doit comporter exactement un groupe de cette catégorie (BT-118).
+    en_sha: adb9935e965d
+  BR-Z-02:
+    title: Si une ligne (BG-25) relève de la catégorie « taux zéro » (Z) (BT-151), la facture doit indiquer le numéro de TVA
+      du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant fiscal (BT-63).
+    en_sha: f1239c9519c8
+  BR-Z-03:
+    title: Si une remise sur le document (BG-20) relève de la catégorie « taux zéro » (Z) (BT-95), la facture doit indiquer
+      le numéro de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant fiscal (BT-63).
+    en_sha: 4d8b70355b0a
+  BR-Z-04:
+    title: Si des frais sur le document (BG-21) relève de la catégorie « taux zéro » (Z) (BT-102), la facture doit indiquer
+      le numéro de TVA du vendeur (BT-31), son identifiant fiscal (BT-32) ou le numéro de TVA de son représentant fiscal (BT-63).
+    en_sha: fd878eef8a82
+  BR-Z-05:
+    title: Pour une ligne (BG-25) de catégorie « taux zéro » (Z) (BT-151), le taux de TVA (BT-152) doit être nul (0).
+    en_sha: f7aaec6a9f1e
+  BR-Z-06:
+    title: Pour une remise sur le document (BG-20) de catégorie « taux zéro » (Z) (BT-95), le taux de TVA (BT-96) doit être
+      nul (0).
+    en_sha: e639a8a450fc
+  BR-Z-07:
+    title: Pour des frais sur le document (BG-21) de catégorie « taux zéro » (Z) (BT-102), le taux de TVA (BT-103) doit être
+      nul (0).
+    en_sha: 87f187585c27
+  BR-Z-08:
+    title: 'Dans le groupe de catégorie « taux zéro » (Z) du récapitulatif de TVA (BG-23), la base HT (BT-116) doit valoir
+      : montants nets des lignes (BT-131), moins remises (BT-92) et plus frais (BT-99) sur le document, en ne retenant que
+      cette catégorie (BT-151, BT-95, BT-102).'
+    en_sha: cc5151c2c6bb
+  BR-Z-09:
+    title: Dans le groupe de catégorie « taux zéro » (Z) du récapitulatif de TVA (BG-23), le montant de TVA (BT-117) doit
+      être nul (0).
+    en_sha: da161c0116a7
+  BR-Z-10:
+    title: Le groupe de catégorie « taux zéro » (Z) du récapitulatif de TVA (BG-23) ne doit comporter aucun motif d'exonération,
+      ni codé (BT-121) ni en clair (BT-120).
+    en_sha: 249587aaaff0
+  CII-SR-046:
+    title: L'attribut schemeID est obligatoire lorsque GlobalID est présent.
+    en_sha: 4d3968ba4d4c
+  CII-SR-103:
+    title: InformationNote ne doit pas être présent.
+    en_sha: 1b4c6d34be9f
+  CII-SR-119:
+    title: Seules les remises sur prix sont admises dans un prix.
+    en_sha: bc128aab3aea
+  CII-SR-378:
+    title: CreditLimitAmount ne doit pas être présent.
+    en_sha: d680ae71109d
+  CII-SR-449:
+    title: Un seul identifiant du lieu de livraison est admis (ID ou GlobalID, pas les deux).
+    en_sha: 62945da5aac3
+  CII-SR-450:
+    title: Un seul identifiant de l'acheteur est admis (ID ou GlobalID, pas les deux).
+    en_sha: ea2495a4f98a
+  CII-SR-451:
+    title: Un seul identifiant du bénéficiaire du paiement est admis (ID ou GlobalID, pas les deux).
+    en_sha: 6e3c63b41534
+  CII-SR-452:
+    title: Un seul SpecifiedTradePaymentTerms est admis.
+    en_sha: e2f00c6803dd
+  CII-SR-453:
+    title: Une seule description dans SpecifiedTradePaymentTerms est admise.
+    en_sha: 85ff1fbc70f4
+  CII-SR-454:
+    title: Un seul ApplicableTradeTax est admis.
+    en_sha: 1f74fbfe10bc
+  CII-SR-461:
+    title: Un seul TaxPointDate est admis.
+    en_sha: 7f53d1f4e64d
+  CII-SR-462:
+    title: Un seul DueDateTypeCode est admis.
+    en_sha: 33d3ebe3d27c
+  CII-SR-470:
+    title: L'identifiant du compte à créditer (BT-84) se donne soit par l'IBAN, soit par un identifiant propriétaire, pas
+      les deux.
+    en_sha: af71d5af95b4
+  CII-SR-474:
+    title: Une ligne ne peut pas comporter plus d'un AdditionalReferencedDocument de TypeCode 130.
+    en_sha: 7720fc087fd0
+  UBL-CR-672:
+    title: Un avoir UBL ne doit pas porter l'attribut listID sur CreditNoteTypeCode.
+    en_sha: 257e898eddc5
+  UBL-SR-07:
+    title: Toute référence à une facture antérieure donne le numéro de cette facture.
+    en_sha: 428c77f460ea
+  UBL-SR-19:
+    title: Le nom du bénéficiaire du paiement ne peut figurer qu'une fois, lorsqu'il diffère du vendeur.
+    en_sha: 903178f05086
+  UBL-SR-20:
+    title: L'identifiant du bénéficiaire du paiement ne peut figurer qu'une fois, lorsqu'il diffère du vendeur.
+    en_sha: 4b3305d0e38d
+  UBL-SR-21:
+    title: L'identifiant légal du bénéficiaire du paiement ne peut figurer qu'une fois, lorsqu'il diffère du vendeur.
+    en_sha: 9ed9e39a3cc3
+  UBL-SR-22:
+    title: Le nom du représentant fiscal ne peut figurer qu'une fois, lorsque le vendeur en a un.
+    en_sha: 45663189988c
+  UBL-SR-23:
+    title: Le numéro de TVA du représentant fiscal ne peut figurer qu'une fois, lorsque le vendeur en a un.
+    en_sha: 9306d88055d1
+  UBL-SR-44:
+    title: La facture ne peut avoir qu'un seul PaymentID, qui peut toutefois servir pour plusieurs PaymentMeans.
+    en_sha: 998497534d03
+  UBL-SR-47:
+    title: Lorsque plusieurs moyens de paiement sont indiqués, leurs codes doivent être identiques.
+    en_sha: 4d4530c0dc4e
+  UBL-SR-48:
+    title: Chaque ligne doit avoir une et une seule catégorie de TVA (ClassifiedTaxCategory).
+    en_sha: c2f831e2493e

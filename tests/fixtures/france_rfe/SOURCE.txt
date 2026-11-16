@@ -1,0 +1,2 @@
+Exemples officiels FNFE-MPE : github.com/fnfempe/France_RFE, commit 97ba0f3d4ef2abed5780e9490d5c3a2be832ab1d,
+dossier FNFE_RFE_INVOICE/Z.example/TEST (hors CDAR). Licence Apache-2.0 (voir LICENSE).

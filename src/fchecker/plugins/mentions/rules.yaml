@@ -1,0 +1,69 @@
+# Mentions obligatoires de facture — métadonnées. La logique est dans predicates.py (même identifiant).
+# covered_by : règles des schematrons officiels qui contrôlent déjà la PRÉSENCE de la mention ;
+# l'outil n'émet alors de constat que pour ce qu'elles ne vérifient pas (contenu, cohérence).
+MEN-01:
+  label: Catégorie d'opération (biens / services / mixte)
+  legal: CGI art. 242 nonies A (réforme) — règle de gestion G1.02
+  bt: BT-23
+  covered_by: [BR-FR-08]
+MEN-02:
+  label: SIREN du client
+  legal: CGI art. 242 nonies A (réforme)
+  bt: BT-47
+  covered_by: [BR-FR-11]
+MEN-03:
+  label: Adresse de livraison des biens (si différente de l'adresse de facturation)
+  legal: CGI art. 242 nonies A, 7° bis — règle de gestion G6.16 (à partir du 01/09/2027)
+  bt: BG-15 (BT-75, BT-77, BT-78, BT-80)
+MEN-04:
+  label: Option pour le paiement de la TVA d'après les débits
+  legal: CGI art. 242 nonies A, 11° bis — règles de gestion G1.43 et G1.44 (BT-8 = 5 en CII, 3 en UBL)
+  bt: BT-8
+MEN-05:
+  label: Taux des pénalités de retard
+  legal: Code de commerce art. L441-9
+  bt: BT-22 (PMD)
+  covered_by: [BR-FR-05]
+MEN-06:
+  label: Indemnité forfaitaire pour frais de recouvrement (40 €)
+  legal: Code de commerce art. L441-9 et D441-5
+  bt: BT-22 (PMT)
+  covered_by: [BR-FR-05]
+MEN-07:
+  label: Conditions d'escompte (ou absence d'escompte)
+  legal: Code de commerce art. L441-9
+  bt: BT-22 (AAB)
+  covered_by: [BR-FR-05]
+MEN-08:
+  label: Date d'échéance ou conditions de paiement
+  legal: Code de commerce art. L441-9
+  bt: BT-9 / BT-20
+  covered_by: [BR-CO-25]
+MEN-09:
+  label: Mention « Autoliquidation »
+  legal: CGI art. 242 nonies A, I-13°
+  bt: BT-120 / BT-121
+MEN-10:
+  label: Franchise en base de TVA (code VATEX-FR-FRANCHISE, SIREN en BT-32)
+  legal: CGI art. 293 B (CIBS art. L. 233-3 à compter du 01/01/2027) — code VATEX-FR-FRANCHISE
+  bt: BT-121 / BT-32
+MEN-11:
+  label: Autofacturation
+  legal: CGI art. 242 nonies A, I-14° — portée par le code type BT-3 (exemples officiels FNFE, cas UC13)
+  bt: BT-3
+MEN-12:
+  label: Identité juridique du vendeur (forme, capital, RCS)
+  legal: Code de commerce art. R123-237 et R123-238 — BT-33 ou notes REG / ABL (exemples officiels FNFE)
+  bt: BT-33 / BG-1 (REG, ABL)
+MEN-13:
+  label: Facture établie par un mandataire (tiers facturant)
+  legal: Mandataire de facturation — BOI-TVA-DECLA-30-20-10-30 § 210 (mention recommandée)
+  bt: BG-1 (DCL) / EXT-FR-FE-BG-05
+MEN-14:
+  label: Date de livraison ou d'exécution (ou période de facturation)
+  legal: CGI art. 242 nonies A, 10° — règle de gestion G1.39
+  bt: BT-72 / BG-26
+MEN-15:
+  label: Numéro du bon de commande (s'il a été établi par l'acheteur)
+  legal: Code de commerce art. L441-9
+  bt: BT-13

@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<rsm:CrossIndustryInvoice xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:100"
+    xmlns:ram="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:100"
+    xmlns:rsm="urn:un:unece:uncefact:data:standard:CrossIndustryInvoice:100"
+    xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:100"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <rsm:ExchangedDocumentContext>
+        
+        <ram:BusinessProcessSpecifiedDocumentContextParameter>
+            <ram:ID>B4</ram:ID>
+        </ram:BusinessProcessSpecifiedDocumentContextParameter>
+        
+        <ram:GuidelineSpecifiedDocumentContextParameter>
+            <ram:ID>urn:cen.eu:en16931:2017</ram:ID>
+        </ram:GuidelineSpecifiedDocumentContextParameter>
+    </rsm:ExchangedDocumentContext>
+    <rsm:ExchangedDocument>
+        <ram:ID>MAT-025-F-B4-G</ram:ID>
+        <ram:TypeCode>380</ram:TypeCode>
+        <ram:IssueDateTime>
+            <udt:DateTimeString format="102">20261109</udt:DateTimeString>
+        </ram:IssueDateTime>
+        
+            
+        <ram:IncludedNote>
+            <ram:Content>En cas de retard de paiement, des pénalités au taux de 3 fois le taux d&#39;intérêt légal seront exigibles (art. L441-10 du Code de commerce).</ram:Content>
+            
+            <ram:SubjectCode>PMD</ram:SubjectCode>
+            
+        </ram:IncludedNote>
+            
+        <ram:IncludedNote>
+            <ram:Content>Une indemnité forfaitaire pour frais de recouvrement de 40 € sera due en cas de retard de paiement (art. L441-10 et D441-5 du Code de commerce).</ram:Content>
+            
+            <ram:SubjectCode>PMT</ram:SubjectCode>
+            
+        </ram:IncludedNote>
+            
+        <ram:IncludedNote>
+            <ram:Content>Aucun escompte accordé pour paiement anticipé.</ram:Content>
+            
+            <ram:SubjectCode>AAB</ram:SubjectCode>
+            
+        </ram:IncludedNote>
+            
+        <ram:IncludedNote>
+            <ram:Content>SAS au capital de 10 000 EUR</ram:Content>
+            
+            <ram:SubjectCode>REG</ram:SubjectCode>
+            
+        </ram:IncludedNote>
+            
+        <ram:IncludedNote>
+            <ram:Content>RCS Lyon B 538006248</ram:Content>
+            
+            <ram:SubjectCode>ABL</ram:SubjectCode>
+            
+        </ram:IncludedNote>
+            
+        
+    </rsm:ExchangedDocument>
+    <rsm:SupplyChainTradeTransaction>
+
+        
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>1</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedTradeProduct>
+                
+                <ram:Name>Chaise de bureau</ram:Name>
+            </ram:SpecifiedTradeProduct>
+            <ram:SpecifiedLineTradeAgreement>
+                <ram:NetPriceProductTradePrice>
+                    <ram:ChargeAmount>250.00</ram:ChargeAmount>
+                    
+                </ram:NetPriceProductTradePrice>
+            </ram:SpecifiedLineTradeAgreement>
+            <ram:SpecifiedLineTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">3.0</ram:BilledQuantity>
+            </ram:SpecifiedLineTradeDelivery>
+            <ram:SpecifiedLineTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>G</ram:CategoryCode>
+                    
+                    <ram:RateApplicablePercent>0.00</ram:RateApplicablePercent>
+                    
+                </ram:ApplicableTradeTax>
+                
+                
+                <ram:SpecifiedTradeSettlementLineMonetarySummation>
+                    <ram:LineTotalAmount>750.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementLineMonetarySummation>
+            </ram:SpecifiedLineTradeSettlement>
+        </ram:IncludedSupplyChainTradeLineItem>
+        
+        <ram:IncludedSupplyChainTradeLineItem>
+            <ram:AssociatedDocumentLineDocument>
+                <ram:LineID>2</ram:LineID>
+            </ram:AssociatedDocumentLineDocument>
+            <ram:SpecifiedTradeProduct>
+                
+                <ram:Name>Lampe LED</ram:Name>
+            </ram:SpecifiedTradeProduct>
+            <ram:SpecifiedLineTradeAgreement>
+                <ram:NetPriceProductTradePrice>
+                    <ram:ChargeAmount>640.00</ram:ChargeAmount>
+                    
+                </ram:NetPriceProductTradePrice>
+            </ram:SpecifiedLineTradeAgreement>
+            <ram:SpecifiedLineTradeDelivery>
+                <ram:BilledQuantity unitCode="C62">11.0</ram:BilledQuantity>
+            </ram:SpecifiedLineTradeDelivery>
+            <ram:SpecifiedLineTradeSettlement>
+                <ram:ApplicableTradeTax>
+                    <ram:TypeCode>VAT</ram:TypeCode>
+                    <ram:CategoryCode>G</ram:CategoryCode>
+                    
+                    <ram:RateApplicablePercent>0.00</ram:RateApplicablePercent>
+                    
+                </ram:ApplicableTradeTax>
+                
+                
+                <ram:SpecifiedTradeSettlementLineMonetarySummation>
+                    <ram:LineTotalAmount>7040.00</ram:LineTotalAmount>
+                </ram:SpecifiedTradeSettlementLineMonetarySummation>
+            </ram:SpecifiedLineTradeSettlement>
+        </ram:IncludedSupplyChainTradeLineItem>
+        
+        <ram:ApplicableHeaderTradeAgreement>
+            
+            <ram:SellerTradeParty>
+
+                <ram:GlobalID schemeID="0009">53800624800016</ram:GlobalID>
+
+
+                <ram:Name>Atelier Lab SAS</ram:Name>
+
+                <ram:SpecifiedLegalOrganization>
+                    
+                    <ram:ID schemeID="0002">538006248</ram:ID>
+                    
+                    
+                    <ram:TradingBusinessName>Atelier Lab</ram:TradingBusinessName>
+                    
+                </ram:SpecifiedLegalOrganization>
+
+
+                <ram:PostalTradeAddress>
+                    <ram:PostcodeCode>69002</ram:PostcodeCode>
+                    <ram:LineOne>12 rue des Essais</ram:LineOne>
+                    
+                    <ram:CityName>Lyon</ram:CityName>
+                    <ram:CountryID>FR</ram:CountryID>
+                </ram:PostalTradeAddress>
+                
+                <ram:URIUniversalCommunication>
+                    <ram:URIID schemeID="0225">538006248</ram:URIID>
+                </ram:URIUniversalCommunication>
+                
+                
+                <ram:SpecifiedTaxRegistration>
+                    <ram:ID schemeID="VA">FR60538006248</ram:ID>
+                </ram:SpecifiedTaxRegistration>
+                
+            </ram:SellerTradeParty>
+            <ram:BuyerTradeParty>
+
+
+                <ram:Name>Exemple Ltée</ram:Name>
+
+
+                <ram:PostalTradeAddress>
+                    <ram:PostcodeCode>H2X 1Y4</ram:PostcodeCode>
+                    <ram:LineOne>67 avenue du Commerce</ram:LineOne>
+                    
+                    <ram:CityName>Montréal</ram:CityName>
+                    <ram:CountryID>CA</ram:CountryID>
+                </ram:PostalTradeAddress>
+                
+                <ram:URIUniversalCommunication>
+                    <ram:URIID schemeID="EM">compta@client.example</ram:URIID>
+                </ram:URIUniversalCommunication>
+                
+                
+                <ram:SpecifiedTaxRegistration>
+                    <ram:ID schemeID="VA">CA462603376</ram:ID>
+                </ram:SpecifiedTaxRegistration>
+                
+            </ram:BuyerTradeParty>
+            
+            
+        </ram:ApplicableHeaderTradeAgreement>
+        <ram:ApplicableHeaderTradeDelivery>
+            
+            
+            <ram:ActualDeliverySupplyChainEvent>
+                <ram:OccurrenceDateTime>
+                    <udt:DateTimeString format="102">20261106</udt:DateTimeString>
+                </ram:OccurrenceDateTime>
+            </ram:ActualDeliverySupplyChainEvent>
+            
+        </ram:ApplicableHeaderTradeDelivery>
+        <ram:ApplicableHeaderTradeSettlement>
+            
+            <ram:InvoiceCurrencyCode>EUR</ram:InvoiceCurrencyCode>
+
+            
+
+            
+            <ram:SpecifiedTradeSettlementPaymentMeans>
+                <ram:TypeCode>20</ram:TypeCode>
+                
+                <ram:Information>chèque</ram:Information>
+                
+                
+            </ram:SpecifiedTradeSettlementPaymentMeans>
+            
+
+            
+            <ram:ApplicableTradeTax>
+                <ram:CalculatedAmount>0.00</ram:CalculatedAmount>
+                <ram:TypeCode>VAT</ram:TypeCode>
+                
+                <ram:ExemptionReason>Exportation hors de l’Union européenne</ram:ExemptionReason>
+                
+                <ram:BasisAmount>7790.00</ram:BasisAmount>
+                <ram:CategoryCode>G</ram:CategoryCode>
+                
+                <ram:ExemptionReasonCode>VATEX-EU-G</ram:ExemptionReasonCode>
+                
+                
+                
+                <ram:RateApplicablePercent>0.00</ram:RateApplicablePercent>
+                
+            </ram:ApplicableTradeTax>
+            
+
+            
+
+            
+
+            
+            <ram:SpecifiedTradePaymentTerms>
+                <ram:DueDateDateTime>
+                    <udt:DateTimeString format="102">20261209</udt:DateTimeString>
+                </ram:DueDateDateTime>
+            </ram:SpecifiedTradePaymentTerms>
+            
+
+            <ram:SpecifiedTradeSettlementHeaderMonetarySummation>
+                <ram:LineTotalAmount>7790.00</ram:LineTotalAmount>
+                
+                
+                <ram:TaxBasisTotalAmount>7790.00</ram:TaxBasisTotalAmount>
+                <ram:TaxTotalAmount currencyID="EUR">0.00</ram:TaxTotalAmount>
+                <ram:GrandTotalAmount>7790.00</ram:GrandTotalAmount>
+                <ram:TotalPrepaidAmount>2337.00</ram:TotalPrepaidAmount>
+                <ram:DuePayableAmount>5453.00</ram:DuePayableAmount>
+            </ram:SpecifiedTradeSettlementHeaderMonetarySummation>
+
+
+
+            
+
+        </ram:ApplicableHeaderTradeSettlement>
+    </rsm:SupplyChainTradeTransaction>
+</rsm:CrossIndustryInvoice>

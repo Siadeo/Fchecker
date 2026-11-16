@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "peppol_enabled": true,
+  "peppol_url": "https://directory.peppol.eu/search/1.0/json",
+  "peppol_timeout": 5.0,
+  "peppol_cache_hours": 1.0,
+  "smp_url": "https://peppol.helger.com/api"
+}

@@ -1,0 +1,4 @@
+Corpus généré par ezfacture Lab (D:\__dev_projects\ezfacture_lab), commit fa3281d, graine 42.
+Régénération : venv\Scripts\python -m lab generate --out ..\fchecker\tests\fixtures\lab
+Ne pas modifier à la main : manifest.yaml et cii/ sont réécrits à chaque génération.
+Licence Apache-2.0, Copyright (C) 2026 Siadeo. Données fictives.

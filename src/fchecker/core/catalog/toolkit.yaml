@@ -1,0 +1,346 @@
+# Textes pédagogiques rédigés pour Fchecker. Priment sur official.yaml (généré).
+# Champs : title, explanation, example, correction, bt (liste).
+# Les identifiants propres à l'outil sont préfixés : FR-PROFIL, PACK, XSD, SCH, ID, DIR, PDFA, MEN, COH.
+
+# --- Profils ------------------------------------------------------------------------------
+FR-PROFIL-01:
+  title: Profil non retenu par la réforme (MINIMUM ou BASIC)
+  explanation: >-
+    Le socle de la réforme ne retient pour Factur-X que les profils EN 16931 et EXTENDED, ainsi que BASIC WL à titre
+    transitoire (jusqu'au 01/09/2027, date à confirmer). MINIMUM est écarté parce qu'il contient trop peu de données
+    structurées. BASIC est écarté pour une autre raison : c'est un sous-ensemble d'EN 16931, donc une facture BASIC
+    valide peut être déclarée directement en EN 16931.
+  correction: Déclarer ou générer la facture au profil EN 16931 (ou EXTENDED si des données étendues sont nécessaires).
+  bt: [BT-24]
+FR-PROFIL-02:
+  title: Niveau Factur-X du PDF incohérent avec le profil du XML
+  explanation: >-
+    Le niveau déclaré dans les métadonnées XMP du PDF (fx:ConformanceLevel) doit correspondre au profil indiqué dans le
+    XML (BT-24). Une incohérence révèle souvent un PDF regénéré sans mise à jour des métadonnées.
+  example: "XML : urn:cen.eu:en16931:2017 → XMP : <fx:ConformanceLevel>EN 16931</fx:ConformanceLevel>"
+  bt: [BT-24]
+FR-PROFIL-03:
+  title: Profil BASIC WL toléré uniquement jusqu'au 01/09/2027
+  explanation: >-
+    BASIC WL ne contient pas les lignes de facture. Le socle de la réforme le tolère au démarrage, jusqu'au 01/09/2027
+    (date à confirmer) ; il faut prévoir la migration vers EN 16931.
+  bt: [BT-24]
+FR-PROFIL-04:
+  title: Identifiant de profil (BT-24) non reconnu
+  explanation: >-
+    L'identifiant de spécification ne correspond à aucun profil connu. Les contrôles EN 16931 génériques sont appliqués.
+  example: "EN 16931 : urn:cen.eu:en16931:2017 — EXTENDED : urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended"
+  bt: [BT-24]
+FR-PROFIL-05:
+  title: Contrôles de profil partiels
+  explanation: >-
+    Aucun XSD ni schematron propre à ce profil n'est publié pour la réforme : seuls les contrôles EN 16931 et les
+    règles FR sont appliqués.
+  bt: [BT-24]
+PACK-MISSING:
+  title: Contrôle non effectué (pack de règles absent)
+  explanation: Le fichier de règles nécessaire n'est pas présent dans l'installation. Réinstaller l'application.
+
+# --- Règles EN 16931 fréquentes : explication et exemple -------------------------------------
+BR-CO-10:
+  explanation: >-
+    La somme des montants nets des lignes (BT-131) doit être exactement égale au total des lignes (BT-106). Les écarts
+    viennent presque toujours d'arrondis : arrondir chaque ligne à 2 décimales AVANT de faire la somme.
+  example: "Lignes 487.72 + 236.62 = 724.34 → <ram:LineTotalAmount>724.34</ram:LineTotalAmount>"
+BR-CO-13:
+  explanation: >-
+    Total HT (BT-109) = total des lignes (BT-106) − remises de document (BT-107) + frais de document (BT-108).
+BR-CO-14:
+  explanation: >-
+    Le total de TVA (BT-110) doit être égal à la somme des montants de TVA de chaque ventilation (BT-117).
+BR-CO-15:
+  explanation: >-
+    Le montant TTC doit être exactement la somme du HT et de la TVA, au centime près. Vérifier que les trois montants
+    sont arrondis à 2 décimales et que le TTC n'a pas été calculé à partir de montants non arrondis.
+  example: "HT 1000.00 + TVA 200.00 → <ram:GrandTotalAmount>1200.00</ram:GrandTotalAmount>"
+  correction: Recalculer BT-112 = BT-109 + BT-110.
+BR-CO-16:
+  explanation: >-
+    Le net à payer (BT-115) = TTC (BT-112) − montant déjà payé (BT-113) + arrondi (BT-114). Sans acompte ni arrondi,
+    le net à payer est égal au TTC.
+  example: "TTC 1200.00, acompte 200.00 → <ram:DuePayableAmount>1000.00</ram:DuePayableAmount>"
+BR-CO-25:
+  explanation: >-
+    Si un montant reste à payer (BT-115 > 0), la facture doit indiquer une date d'échéance (BT-9) ou des conditions de
+    paiement (BT-20). C'est aussi une mention obligatoire du Code de commerce (art. L441-9).
+
+# --- Règles FR fréquentes ------------------------------------------------------------------
+BR-FR-05:
+  explanation: >-
+    Trois mentions légales du Code de commerce (art. L441-9) doivent figurer en notes de facture (BG-1), chacune avec
+    son code sujet : PMT (indemnité forfaitaire de 40 € pour frais de recouvrement), PMD (taux des pénalités de retard)
+    et AAB (conditions d'escompte, ou mention de son absence).
+  example: |-
+    <ram:IncludedNote>
+      <ram:Content>Indemnité forfaitaire pour frais de recouvrement : 40 EUR</ram:Content>
+      <ram:SubjectCode>PMT</ram:SubjectCode>
+    </ram:IncludedNote>
+BR-FR-08:
+  explanation: >-
+    Le cadre de facturation (BT-23) indique la catégorie d'opération exigée par la réforme : B = livraison de biens,
+    S = prestation de services, M = facture double (biens et services). Le chiffre précise le cas (1 = facture
+    simple, 2 = déjà payée, 4 = définitive après acompte…).
+  example: "<ram:BusinessProcessSpecifiedDocumentContextParameter><ram:ID>S1</ram:ID></ram:BusinessProcessSpecifiedDocumentContextParameter>"
+  bt: [BT-23]
+BR-FR-09:
+  explanation: >-
+    Un SIRET (schéma 0009) comporte 14 chiffres dont les 9 premiers sont le SIREN de l'entreprise. Un SIRET qui ne
+    commence pas par le SIREN déclaré indique une erreur de saisie ou un mauvais établissement.
+BR-FR-10:
+  explanation: >-
+    Le SIREN du vendeur (BT-30, schéma 0002) est obligatoire : 9 chiffres, sans espace.
+  example: '<ram:SpecifiedLegalOrganization><ram:ID schemeID="0002">100000009</ram:ID></ram:SpecifiedLegalOrganization>'
+  bt: [BT-30]
+BR-FR-11:
+  explanation: >-
+    Pour une facture B2B domestique (note BAR = B2B), le SIREN de l'acheteur (BT-47) est une mention obligatoire de la
+    réforme.
+  bt: [BT-47]
+BR-FR-12:
+  explanation: >-
+    L'adresse électronique de facturation de l'acheteur (BT-49) est obligatoire : c'est elle qui permet l'acheminement
+    par les plateformes agréées. Elle doit être celle publiée dans l'annuaire.
+  example: '<ram:URIUniversalCommunication><ram:URIID schemeID="0225">100000009_FOURNISSEUR</ram:URIID></ram:URIUniversalCommunication>'
+  bt: [BT-49]
+
+# --- Contrôles propres à l'outil ----------------------------------------------------------
+XSD:
+  title: Structure XML non conforme au schéma (XSD)
+  explanation: >-
+    Le fichier ne respecte pas la structure imposée par le schéma XSD de sa syntaxe (ordre des éléments, éléments
+    obligatoires, types de valeurs). Les contrôles de règles de gestion peuvent être faussés tant que la structure
+    n'est pas corrigée.
+SCH-ERROR:
+  title: Exécution d'un contrôle impossible
+  explanation: Une erreur technique a empêché l'exécution d'un contrôle ; les autres contrôles restent valables.
+
+# --- PDF/A-3 et Factur-X (structure) ------------------------------------------------------------
+PDFA-01:
+  explanation: >-
+    Un PDF/A doit commencer par « %PDF-1.x » suivi, sur la ligne suivante, d'un commentaire contenant au moins
+    4 octets binaires (> 127) : il signale aux outils de transfert que le fichier est binaire.
+PDFA-02:
+  explanation: >-
+    Factur-X impose le PDF/A-3 (seule partie de la norme qui autorise un fichier XML embarqué). Les métadonnées XMP
+    doivent le déclarer : pdfaid:part = 3 et pdfaid:conformance = A, B ou U.
+  example: '<rdf:Description pdfaid:part="3" pdfaid:conformance="B"/>'
+PDFA-03:
+  explanation: Le chiffrement (même sans mot de passe d'ouverture) est interdit en PDF/A.
+PDFA-04:
+  explanation: >-
+    Un PDF/A doit embarquer un « OutputIntent » (sous-type GTS_PDFA1) portant un profil de couleur ICC, par exemple
+    sRGB, pour garantir un rendu identique partout.
+PDFA-05:
+  explanation: >-
+    Toutes les polices utilisées pour afficher du texte doivent être embarquées dans le fichier pour que la facture
+    s'affiche à l'identique dans 10 ans (ISO 19005-3 § 6.2.11.4.1). Sont dispensées les polices déclarées mais
+    inutilisées et celles qui ne servent qu'à du texte invisible (mode de rendu 3, ex. couche de texte OCR).
+    Régénérer le PDF avec l'option « incorporer les polices ».
+PDFA-06:
+  explanation: Le JavaScript et les actions de lancement d'application sont interdits en PDF/A.
+PDFA-07:
+  explanation: Le trailer du PDF doit contenir un identifiant de fichier (/ID), généralement ajouté automatiquement par les outils conformes.
+PDFA-08:
+  explanation: >-
+    Le XML de facture doit être embarqué sous le nom « factur-x.xml », déclaré comme fichier associé (tableau /AF
+    du catalogue) avec une relation AFRelationship = Alternative (profils EN 16931 / EXTENDED), Data ou Source
+    (MINIMUM, BASIC WL), et le type MIME text/xml.
+  example: "<< /Type /Filespec /F (factur-x.xml) /UF (factur-x.xml) /AFRelationship /Alternative ... >>"
+PDFA-09:
+  explanation: >-
+    Les métadonnées XMP doivent déclarer le schéma d'extension Factur-X (espace de noms
+    urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#) et renseigner fx:DocumentType = INVOICE,
+    fx:DocumentFileName = factur-x.xml, fx:Version et fx:ConformanceLevel.
+  example: '<fx:DocumentType>INVOICE</fx:DocumentType><fx:DocumentFileName>factur-x.xml</fx:DocumentFileName>'
+PDFA-10:
+  explanation: Le titre et le producteur du dictionnaire Info du PDF doivent être repris à l'identique dans les métadonnées XMP.
+
+# --- Mentions obligatoires ------------------------------------------------------------------------
+MEN-02:
+  explanation: >-
+    Depuis la réforme (CGI art. 242 nonies A), le SIREN du client est une mention obligatoire des factures entre
+    assujettis établis en France. Il se porte en BT-47 (schéma 0002).
+  example: '<ram:SpecifiedLegalOrganization><ram:ID schemeID="0002">200000008</ram:ID></ram:SpecifiedLegalOrganization>'
+MEN-03:
+  explanation: >-
+    Règle de gestion G6.16 de la DGFiP : lorsque les biens sont livrés à une autre adresse que celle de l'acheteur (BG-8),
+    l'adresse de livraison (BG-15) doit comporter la ligne 1 (BT-75), la localité (BT-77), le code postal (BT-78) et
+    le pays (BT-80). L'obligation s'applique à partir du 01/09/2027 et ne concerne pas les prestations de services.
+    L'outil ne peut pas la vérifier automatiquement : il se limite à signaler les cas à contrôler.
+MEN-04:
+  explanation: >-
+    Nouvelle mention de la réforme : l'entreprise qui a opté pour le paiement de la TVA d'après les débits doit
+    l'indiquer sur ses factures de services, par le code de date d'exigibilité BT-8 (5 en CII, 3 en UBL — règle
+    DGFiP G1.43). La DGFiP précise (G1.67) que cette règle « ne peut pas être contrôlée d'un point de vue
+    applicatif » : l'outil ne peut pas savoir si l'option a été exercée et se limite à un rappel.
+  example: "<ram:ApplicableTradeTax>…<ram:DueDateTypeCode>5</ram:DueDateTypeCode>…</ram:ApplicableTradeTax>"
+MEN-05:
+  explanation: >-
+    La mention des pénalités de retard (note PMD) doit indiquer le taux applicable (au minimum trois fois le taux
+    d'intérêt légal, ou le taux contractuel).
+  example: "Pénalités de retard : 3 fois le taux d'intérêt légal"
+MEN-06:
+  explanation: >-
+    Tout professionnel en retard de paiement doit une indemnité forfaitaire pour frais de recouvrement de 40 € minimum
+    (art. D441-5 du Code de commerce) : son montant doit apparaître dans la note PMT.
+  example: "Indemnité forfaitaire pour frais de recouvrement : 40 €"
+MEN-09:
+  explanation: >-
+    En cas d'autoliquidation (catégorie de TVA AE), la loi impose le texte « Autoliquidation » sur la facture : le
+    porter dans le motif d'exonération (BT-120), avec le code VATEX-EU-AE (BT-121).
+  example: "<ram:ExemptionReason>Autoliquidation</ram:ExemptionReason><ram:ExemptionReasonCode>VATEX-EU-AE</ram:ExemptionReasonCode>"
+MEN-10:
+  explanation: >-
+    Une facture en franchise en base de TVA comporte un détail de TVA avec la
+    catégorie « E » (BT-118) ET le code d'exonération « VATEX-FR-FRANCHISE » (BT-121). Un vendeur sans
+    numéro de TVA reporte son SIREN en BT-32 (identifiant fiscal du vendeur). Le texte de la mention peut
+    compléter le code en BT-120 mais ne le remplace pas : « TVA non applicable, art. 293 B du CGI » jusqu'au
+    31/12/2026, puis « TVA non applicable, article L. 233-3 du CIBS » à compter du 01/01/2027 (recodification
+    de la TVA, ordonnance n° 2025-1247) ; l'ancienne référence au CGI reste admise jusqu'au 31/12/2027
+    (BOI-RES-TVA-000253). Cette règle n'est pas contrôlée par les schematrons FNFE.
+  example: |-
+    <ram:ExemptionReason>TVA non applicable, article L. 233-3 du CIBS</ram:ExemptionReason>
+    <ram:ExemptionReasonCode>VATEX-FR-FRANCHISE</ram:ExemptionReasonCode>
+    <ram:SpecifiedTaxRegistration><ram:ID schemeID="FC">100000009</ram:ID></ram:SpecifiedTaxRegistration>
+MEN-14:
+  explanation: >-
+    Règle de gestion G1.39 (CGI art. 242 nonies A, 10°) : la date de livraison ou de fin d'exécution de la prestation
+    (BT-72) doit figurer lorsqu'elle est déterminée et différente de la date d'émission ; à défaut, une date de
+    livraison par ligne ou une période de facturation (BG-26) pour une facture périodique. La DGFiP précise que la
+    règle n'est pas contrôlable automatiquement : l'outil se limite à un rappel.
+MEN-15:
+  explanation: >-
+    L'article L441-9 du Code de commerce impose de reporter sur la facture le numéro du bon de commande lorsque
+    l'acheteur en a établi un. Il se porte en BT-13. L'outil ne peut pas savoir si un bon de commande existe :
+    il se limite à un rappel lorsque le numéro est absent.
+  example: "<ram:BuyerOrderReferencedDocument><ram:IssuerAssignedID>BC-2026-0042</ram:IssuerAssignedID></ram:BuyerOrderReferencedDocument>"
+MEN-11:
+  explanation: >-
+    Une facture émise par le client au nom du fournisseur (autofacturation) doit porter la mention « Autofacturation ».
+    Dans la facture électronique, elle est portée par le code type (BT-3 = 389, 501, 500, 471, 473, 261 ou 502),
+    comme dans les exemples officiels FNFE (cas d'usage UC13) ; la représentation lisible l'affiche.
+MEN-12:
+  explanation: >-
+    Les sociétés commerciales doivent indiquer sur leurs factures leur forme juridique et, pour les SARL et les
+    sociétés par actions, leur capital social (art. R123-238 du Code de commerce), ainsi que leur numéro RCS avec
+    la ville du greffe (art. R123-237). Dans la facture électronique, les
+    exemples officiels FNFE les portent soit en BT-33 (informations juridiques complémentaires du vendeur),
+    soit dans des notes de facture : code sujet REG (forme, capital) et ABL (RCS).
+  example: |-
+    <ram:IncludedNote><ram:Content>SARL au capital de 50 000 EUR</ram:Content><ram:SubjectCode>REG</ram:SubjectCode></ram:IncludedNote>
+    <ram:IncludedNote><ram:Content>RCS PARIS 100 000 009</ram:Content><ram:SubjectCode>ABL</ram:SubjectCode></ram:IncludedNote>
+MEN-13:
+  explanation: >-
+    Facturation par un mandataire : un tiers (mandataire de facturation) établit la facture à la place du vendeur.
+    Il peut se déclarer dans le bloc Tiers Facturant (EXT-FR-FE-BG-05, profil EXTENDED-CTC-FR). La doctrine fiscale
+    (BOI-TVA-DECLA-30-20-10-30 § 210) recommande la mention « facture établie par A au nom et pour le compte de B »,
+    portée dans une note de code sujet DCL : B est le vendeur (BG-4), qui reste l'émetteur légal de la facture.
+  example: |-
+    <ram:IncludedNote>
+      <ram:Content>Facture établie par Le mandataire au nom et pour le compte du fournisseur</ram:Content>
+      <ram:SubjectCode>DCL</ram:SubjectCode>
+    </ram:IncludedNote>
+
+# --- Cohérence PDF ↔ XML ------------------------------------------------------------------------
+COH-01:
+  explanation: >-
+    Le numéro de facture du XML (BT-1) doit apparaître sur le PDF lisible : c'est le XML qui fait foi, et le PDF doit
+    en être la représentation fidèle.
+COH-02:
+  explanation: >-
+    La date d'émission (BT-2) affichée sur le PDF doit être celle du XML. Un écart d'un jour trahit souvent une
+    génération du PDF et du XML à des moments différents (ou un décalage de fuseau horaire).
+COH-03:
+  explanation: >-
+    La date d'échéance affichée doit être celle du XML (BT-9) : c'est elle qui fixe le point de départ des pénalités.
+COH-04:
+  explanation: >-
+    Le total HT imprimé doit être exactement celui du XML (BT-109), au centime près.
+COH-05:
+  explanation: >-
+    Le total de TVA imprimé doit être exactement celui du XML (BT-110), au centime près.
+COH-06:
+  explanation: >-
+    Le total TTC imprimé doit être exactement celui du XML (BT-112). Un écart d'un centime signale généralement des
+    règles d'arrondi différentes entre le moteur de PDF et le générateur XML.
+COH-07:
+  explanation: >-
+    Lorsqu'il diffère du TTC (acompte, arrondi), le net à payer (BT-115) doit figurer sur le PDF.
+COH-08:
+  explanation: >-
+    Le SIREN du vendeur (BT-30) doit être lisible sur le PDF (seul, ou inclus dans le SIRET, le n° de TVA ou la
+    mention RCS).
+COH-09:
+  explanation: >-
+    Le SIREN du client (BT-47), nouvelle mention obligatoire, devrait apparaître sur le PDF.
+COH-10:
+  title: PDF sans texte exploitable
+  explanation: >-
+    Le PDF semble être une image (scan) : son texte ne peut pas être lu sans reconnaissance optique (OCR), qui n'est
+    pas proposée. Un Factur-X doit normalement être généré directement (texte vectoriel), pas scanné.
+
+# --- Identifiants ---------------------------------------------------------------------------
+ID-SIREN:
+  explanation: >-
+    Un SIREN comporte 9 chiffres dont le dernier est une clé de contrôle (algorithme de Luhn). Une clé fausse révèle
+    une faute de frappe : l'entreprise ne sera pas retrouvée dans l'annuaire et la facture risque d'être rejetée.
+  correction: Vérifier le SIREN sur l'avis de situation INSEE ou annuaire-entreprises.data.gouv.fr.
+ID-SIRET:
+  explanation: >-
+    Un SIRET = SIREN (9 chiffres) + NIC (5 chiffres) ; l'ensemble est contrôlé par l'algorithme de Luhn (sauf
+    établissements de La Poste, SIREN 356000000, dont la somme des chiffres doit être un multiple de 5).
+ID-TVA-CLE:
+  explanation: >-
+    Le numéro de TVA intracommunautaire français est « FR » + clé (2 chiffres) + SIREN. La clé vaut
+    (12 + 3 × (SIREN modulo 97)) modulo 97 : une clé différente indique un numéro erroné.
+  example: "SIREN 100000009 → FR88100000009"
+ID-TVA-SIREN:
+  explanation: >-
+    Le SIREN contenu dans le numéro de TVA doit être celui de l'entreprise (BT-30 pour le vendeur, BT-47 pour
+    l'acheteur). Un écart signale souvent un numéro de TVA recopié d'une autre société du groupe.
+ID-ADR-SIREN:
+  explanation: >-
+    Dans l'annuaire de la réforme, une adresse de facturation (schéma 0225) commence par le SIREN de son titulaire,
+    éventuellement suivi d'un suffixe (« SIREN_SUFFIXE »). Une adresse qui commence par un autre SIREN est suspecte.
+  example: '<ram:URIID schemeID="0225">100000009_FOURNISSEUR</ram:URIID>'
+ID-IBAN:
+  explanation: >-
+    L'IBAN est contrôlé par sa longueur (27 caractères pour la France) et sa clé (modulo 97). Un IBAN invalide
+    empêche le paiement par virement.
+ID-BIC:
+  explanation: Un BIC comporte 8 ou 11 caractères (banque, pays, localisation, agence optionnelle).
+
+# --- Annuaire Peppol -----------------------------------------------------------------------------
+PEP-00:
+  title: Annuaire Peppol non interrogé
+  explanation: >-
+    Sans adresse électronique du destinataire (BT-49, ou BT-34 en autofacture) munie de son schéma, l'annuaire
+    Peppol ne peut pas être consulté.
+PEP-01:
+  explanation: >-
+    L'adresse électronique du destinataire n'est pas publiée dans l'annuaire Peppol (directory.peppol.eu). Cet
+    annuaire public est facultatif : l'adresse peut être joignable sans y figurer, et la référence pour la réforme
+    reste l'annuaire PPF. Vérifier néanmoins l'adresse si la facture doit être acheminée par le réseau Peppol.
+PEP-02:
+  explanation: >-
+    Le destinataire est inscrit dans l'annuaire Peppol, mais n'y annonce aucun type de document correspondant au
+    format de la facture (Factur-X, CII ou UBL). Une adresse qui n'annonce que des messages de statut
+    (CrossDomainAcknowledgementAndResponse) ne reçoit pas de factures. La suggestion liste les types annoncés.
+PEP-03:
+  title: Adresse refusée par l'annuaire Peppol
+  explanation: >-
+    L'annuaire Peppol a répondu, mais a refusé l'adresse électronique interrogée : elle est mal formée ou inexistante.
+    Le schéma d'adresse ou sa valeur sont à revoir, sans quoi la facture risque de ne pas atteindre son destinataire.
+  correction: Vérifier le schéma et la valeur de l'adresse électronique du destinataire (BT-49, ou BT-34 pour une autofacture).
+PEP-06:
+  title: Annuaire Peppol non vérifié
+  explanation: >-
+    L'annuaire Peppol n'a pas pu être consulté (réseau indisponible ou vérification désactivée). Relancer la
+    validation plus tard.
+PEP-OK:
+  title: Adresse inscrite dans l'annuaire Peppol
