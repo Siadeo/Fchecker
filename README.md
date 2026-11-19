@@ -4,6 +4,8 @@ Application desktop pour **contrôler des factures électroniques** dans le cadr
 française de la facturation électronique (2026-2027). Formats pris en charge : Factur-X (PDF/A-3 + XML),
 UN/CEFACT CII et UBL 2.1.
 
+<img src="docs/fchecker.png">
+
 Glissez une facture dans la fenêtre, appuyez sur **F5** : chaque anomalie est localisée dans le XML et
 expliquée en français, avec un exemple de correction.
 
